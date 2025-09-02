@@ -10,6 +10,7 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/authentication" element={<Authentication />}/>
+          
         </Routes>
       </Suspense>
     </Router>
