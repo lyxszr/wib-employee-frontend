@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom"
 import "./Authentication.css"
 
 const Authentication = () => {
+  const navigate = useNavigate();
+
   return (
   <>
     <div className="container">
@@ -11,7 +14,7 @@ const Authentication = () => {
       </div>
 
       <div className="right-panel">
-        <div className="time-in-header">Time In</div>
+        <button onClick={() => navigate("/attendance-record")} className="time-in-header">Time In</button>
 
         <div className="logo-section">
           <img src="WIB LOGO.png" className="baguio-logo" alt="WIB Logo" />
@@ -26,8 +29,6 @@ const Authentication = () => {
           <div className="form-group">
             <input type="password" id="password" placeholder="Password" required />
           </div>
-
-          <a href="#" className="forgot-password">Forgot Password?</a>
 
           <button type="submit" className="btn-login">Login</button>
         </form>
