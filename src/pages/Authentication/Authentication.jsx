@@ -17,7 +17,7 @@ const Authentication = () => {
       <img src="WIB LOGO.png" className="baguio-logo" alt="WIB Logo" />
     </div>
 
-    <form className="login-form" onSubmit={handleLogin}>
+    <form className="login-form">
       <div className="form-group">
         <input type="email" id="email" placeholder="Email" required />
       </div>
