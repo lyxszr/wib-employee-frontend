@@ -78,7 +78,7 @@
   letter-spacing: 0.5px;
 }
 
-.form-input, .form-select, .date-input {
+.form-input, .form-select {
   width: 100%;
   padding: 18px 20px;
   border: 2px solid #e2e8f0;
@@ -90,7 +90,7 @@
   backdrop-filter: blur(10px);
 }
 
-.form-input:focus, .form-select:focus, .date-input:focus {
+.form-input:focus, .form-select:focus {
   outline: none;
   border-color: #667eea;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
