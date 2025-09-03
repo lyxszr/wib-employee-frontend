@@ -31,13 +31,11 @@ const Header = ({
             Welcome, <span id="userName">Juan Dela Cruz</span>!
           </div>
         </div>
-        <div className="logo">
   <img 
     src="WIB LOGO.png" 
     alt="When in Baguio Logo" 
     className="logo-img" 
   />
-</div>
 
       </header>
 

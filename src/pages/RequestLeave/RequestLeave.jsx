@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import Header from "../../components/Header/Header";
-import "./RequestLeave.css";
+import { useMutation } from "@tanstack/react-query"
+import Header from "../../components/Header/Header"
+import "./RequestLeave.css"
 
 const months = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
-];
+]
 
 const RequestLeave = () => {
   const [year, setYear] = useState(new Date().getFullYear());
@@ -20,8 +20,9 @@ const RequestLeave = () => {
     reason: "",
     startDate: "",
     endDate: "",
-  });
-  const [errors, setErrors] = useState({});
+  })
+
+  const [errors, setErrors] = useState({})
   const navigate = useNavigate();
 
   // React Query mutation for submitting leave request
@@ -31,9 +32,9 @@ const RequestLeave = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newRequest),
-      });
+      })
       if (!response.ok) throw new Error("Failed to submit leave request");
-      return response.json();
+      return response.json()
     },
     onSuccess: () => {
       alert("Leave request submitted successfully!");
@@ -44,14 +45,14 @@ const RequestLeave = () => {
         reason: "",
         startDate: "",
         endDate: "",
-      });
+      })
       setErrors({});
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "smooth" })
     },
     onError: (error) => {
-      alert(error.message || "Something went wrong!");
+      alert(error.message || "Something went wrong!")
     },
-  });
+  })
 
   const handleNavClick = (nav) => {
     setActiveNav(nav);
@@ -59,13 +60,13 @@ const RequestLeave = () => {
     else if (nav === "CALENDAR") navigate("/calendar");
     else if (nav === "REQUEST LEAVE") navigate("/request-leave");
     else if (nav === "LOGOUT") navigate("/");
-  };
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
-  };
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -74,7 +75,7 @@ const RequestLeave = () => {
     let newErrors = {};
     Object.entries(formData).forEach(([key, value]) => {
       if (!value.trim()) newErrors[key] = "This field is required";
-    });
+    })
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -83,7 +84,7 @@ const RequestLeave = () => {
     }
 
     leaveRequestMutation.mutate(formData);
-  };
+  }
 
   return (
     <div className="request-leave">
@@ -215,4 +216,4 @@ const RequestLeave = () => {
   );
 };
 
-export default RequestLeave;
+export default RequestLeave
