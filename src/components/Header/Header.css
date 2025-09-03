@@ -1,0 +1,110 @@
+.header {
+            background: #445c2b;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+.header-left {
+            display: flex;
+            align-items: center;
+        }
+
+.profile-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #445c2b;
+            font-weight: bold;
+        }
+
+.welcome-text {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+.logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+.logo::before {
+            content: "🏔️";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+.navigation {
+            background: white;
+            border-bottom: 2px solid #ddd;
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+.nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+.nav-link {
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+.nav-link.active {
+            border-bottom-color: #445c2b;
+            color: #445c2b;
+        }
+
+.date-controls {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+.date-input {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+.content {
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+.month-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+.month-btn {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+.month-btn.active {
+            background:#445c2b;
+            color: white;
+        }
