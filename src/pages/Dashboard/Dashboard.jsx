@@ -1,11 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "./Dashboard.css"
-
-const months = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-]
+import Header from "../../components/Header/Header"
 
 const Dashboard = () => {
   const [year, setYear] = useState(2025)
@@ -15,81 +11,33 @@ const Dashboard = () => {
   const navigate = useNavigate()
 
   const handleMonthBtnClick = (btn) => setActiveMonthBtn(btn)
-  const handleNavClick = (nav) => setActiveNav(nav)
+  const handleNavClick = (nav) => {
+    setActiveNav(nav)
+    if (nav === "DASHBOARD") {
+      navigate("/dashboard")
+    } else if (nav === "REQUEST LEAVE") {
+      navigate("/request-leave")
+    } else if (nav === "CALENDAR") {
+      navigate("/calendar")
+    }
+  };
 
   return (
     <div className="dashboard">
-      <header className="header">
-        <div className="header-left">
-          <div className="profile-icon" role="img" aria-label="profile">👤</div>
-          <div className="welcome-text">
-            Welcome, <span id="userName">Juan Dela Cruz</span>!
-          </div>
-        </div>
-        <div className="logo">When in Baguio</div>
-      </header>
+      <Header
+       activeNav={activeNav}
+  handleNavClick={handleNavClick}
+  year={year}
+  month={month}
+  setYear={setYear}
+  setMonth={setMonth}
+    />
 
-      <nav className="navigation">
-        <div className="nav-links">
-          <button
-            type="button"
-            className={`nav-link${activeNav === "DASHBOARD" ? " active" : ""}`}
-            onClick={() => { handleNavClick("DASHBOARD"); }}
-            style={{ background: "none", border: "none", padding: 0, margin: 0, cursor: "pointer" }}
-          >
-            DASHBOARD
-          </button>
-          <button
-            type="button"
-            className={`nav-link${activeNav === "CALENDAR" ? " active" : ""}`}
-            onClick={() => { handleNavClick("CALENDAR"); }}
-            style={{ background: "none", border: "none", padding: 0, margin: 0, cursor: "pointer" }}
-          >
-            CALENDAR
-          </button>
-          <button
-            type="button"
-            className={`nav-link${activeNav === "REQUEST LEAVE" ? " active" : ""}`}
-            onClick={() => { handleNavClick("REQUEST LEAVE"); }}
-            style={{ background: "none", border: "none", padding: 0, margin: 0, cursor: "pointer" }}
-          >
-            REQUEST LEAVE
-          </button>
-          <button
-            type="button"
-            className="nav-link"
-            onClick={() => navigate("/")}
-            style={{ background: "none", border: "none", padding: 0, margin: 0, cursor: "pointer" }}
-          >
-            LOGOUT
-          </button>
-        </div>
-        <div className="date-controls">
-          <input
-            type="number"
-            className="date-input"
-            value={year}
-            min={2020}
-            max={2030}
-            onChange={e => setYear(Number(e.target.value))}
-          />
-          <select
-            className="date-input"
-            value={month}
-            onChange={e => setMonth(e.target.value)}
-          >
-            {months.map(m => (
-              <option key={m} value={m}>{m}</option>
-            ))}
-          </select>
-        </div>
-      </nav>
-
-      <main className="content">
-        <div className="month-controls">
-          <button
-            className={`month-btn${activeMonthBtn === "Previous Month" ? " active" : ""}`}
-            onClick={() => handleMonthBtnClick("Previous Month")}
+    <main className="content">
+      <div className="month-controls">
+        <button
+          className={`month-btn${activeMonthBtn === "Previous Month" ? " active" : ""}`}
+          onClick={() => handleMonthBtnClick("Previous Month")}
           >
             Previous Month
           </button>
