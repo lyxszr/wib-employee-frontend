@@ -10,6 +10,7 @@
 .header-left {
             display: flex;
             align-items: center;
+            margin-left: 10px;
         }
 
 .profile-icon {
@@ -29,19 +30,10 @@
             font-size: 20px;
             font-weight: bold;
         }
-
-.logo {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-.logo::before {
-            content: "🏔️";
-            margin-right: 8px;
-            font-size: 24px;
-        }
+.logo-img {
+  height: 40px; /* adjust as needed */
+  object-fit: contain;
+}
 
 .navigation {
             background: white;
@@ -59,18 +51,19 @@
         }
 
 .nav-link {
-            padding: 8px 16px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #333;
+  font-weight: normal; /* not bold by default */
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s;
+}
 
 .nav-link.active {
-            border-bottom-color: #445c2b;
-            color: #445c2b;
-        }
+  border-bottom-color: #445c2b;
+  color: #445c2b;
+  font-weight: bolder;/* active nav is bold */
+}
 
 .date-controls {
             display: flex;
