@@ -1,120 +1,9 @@
  /* Dashboard */
-        .dashboard {
+.dashboard {
             display: block;
         }
 
-        .header {
-            background: #445c2b;
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .profile-icon {
-            width: 40px;
-            height: 40px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            color: #445c2b;
-            font-weight: bold;
-        }
-
-        .welcome-text {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .logo::before {
-            content: "🏔️";
-            margin-right: 8px;
-            font-size: 24px;
-        }
-
-        .navigation {
-            background: white;
-            border-bottom: 2px solid #ddd;
-            padding: 10px 30px;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-link {
-            padding: 8px 16px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .nav-link.active {
-            border-bottom-color: #445c2b;
-            color: #445c2b;
-        }
-
-        .date-controls {
-            display: flex;
-            gap: 10px;
-            margin-left: auto;
-        }
-
-        .date-input {
-            padding: 5px 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-        }
-
-        .content {
-            padding: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .month-controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .month-btn {
-            padding: 10px 20px;
-            border: 1px solid #ddd;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .month-btn.active {
-            background:#445c2b;
-            color: white;
-        }
-
-        .page-title {
+.page-title {
             text-align: right;
             font-size: 28px;
             font-weight: bold;
@@ -122,7 +11,7 @@
             color: #333;
         }
 
-        .summary-section {
+.summary-section {
             background: white;
             border-radius: 8px;
             overflow: hidden;
@@ -130,7 +19,7 @@
             margin-bottom: 30px;
         }
 
-        .summary-tab {
+.summary-tab {
             background: #f8f9fa;
             padding: 15px 20px;
             border-bottom: 2px solid #ddd;
@@ -138,13 +27,13 @@
             color: #333;
         }
 
-        .export-buttons {
+.export-buttons {
             float: right;
             display: flex;
             gap: 10px;
         }
 
-        .export-btn {
+.export-btn {
             padding: 8px 16px;
             background: #f8f9fa;
             border: 1px solid #ddd;
@@ -153,17 +42,17 @@
             transition: background-color 0.3s;
         }
 
-        .export-btn:hover {
+.export-btn:hover {
             background: #e9ecef;
         }
 
-        .attendance-table {
+.attendance-table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 30px;
         }
 
-        .attendance-table th {
+.attendance-table th {
             background: #445c2b;
             color: white;
             padding: 12px;
@@ -171,23 +60,23 @@
             font-weight: bold;
         }
 
-        .attendance-table td {
+.attendance-table td {
             padding: 12px;
             text-align: center;
             border-bottom: 1px solid #ddd;
         }
 
-        .attendance-table tr:nth-child(even) {
+.attendance-table tr:nth-child(even) {
             background: #f8f9fa;
         }
 
-        .leave-credits {
+.leave-credits {
             display: flex;
             gap: 30px;
             margin-bottom: 30px;
         }
 
-        .leave-section {
+.leave-section {
             flex: 1;
             background: white;
             border-radius: 8px;
@@ -195,7 +84,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .leave-header {
+.leave-header {
             background: #445c2b;
             color: white;
             padding: 15px;
@@ -203,12 +92,12 @@
             text-align: center;
         }
 
-        .leave-table {
+.leave-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .leave-table th {
+.leave-table th {
             background: #445c2b;
             color: white;
             padding: 10px;
@@ -216,14 +105,14 @@
             font-size: 12px;
         }
 
-        .leave-table td {
+.leave-table td {
             padding: 10px;
             text-align: center;
             border-bottom: 1px solid #ddd;
             font-size: 12px;
         }
 
-        .overtime-sections {
+.overtime-sections {
             display: flex;
             gap: 30px;
             margin-bottom: 30px;
