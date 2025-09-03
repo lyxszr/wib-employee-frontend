@@ -68,7 +68,7 @@ const AttendanceRecord = () => {
 
       {/* Right Panel */}
       <div className="right-panel">
-        <a onClick={() => navigate("/dashboard")} className="signup-header">
+        <a onClick={() => navigate("/authentication")} className="signup-header">
           Sign in
         </a>
 
