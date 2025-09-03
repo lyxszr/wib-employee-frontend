@@ -1,0 +1,239 @@
+ /* Dashboard */
+.dashboard {
+            display: block;
+        }
+
+.page-title {
+            text-align: right;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+.summary-section {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+.summary-tab {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 2px solid #ddd;
+            font-weight: bold;
+            color: #333;
+        }
+
+.export-buttons {
+            float: right;
+            display: flex;
+            gap: 10px;
+        }
+
+.export-btn {
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s;
+        }
+
+.export-btn:hover {
+            background: #e9ecef;
+        }
+
+.attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+.attendance-table th {
+            background: #445c2b;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+.attendance-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+.attendance-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+.leave-credits {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+.leave-section {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+.leave-header {
+            background: #445c2b;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+.leave-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+.leave-table th {
+            background: #445c2b;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+.leave-table td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 12px;
+        }
+
+.overtime-sections {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .overtime-section {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .overtime-section h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .no-records {
+            color: #666;
+            font-style: italic;
+        }
+
+        .holiday-section {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .holiday-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 2px solid #ddd;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .holiday-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .holiday-table th {
+            background:#445c2b;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .holiday-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 15px 20px;
+        }
+
+        .page-btn {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .page-btn:hover, .page-btn.active {
+            background: #445c2b;
+            color: white;
+        }
+
+        .show-details-btn {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: background-color 0.3s;
+        }
+
+        .show-details-btn:hover {
+            background: #e9ecef;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .navigation {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .date-controls {
+                margin-left: 0;
+                justify-content: center;
+            }
+            
+            .leave-credits, .overtime-sections {
+                flex-direction: column;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+        }
