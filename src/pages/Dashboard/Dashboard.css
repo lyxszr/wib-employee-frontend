@@ -57,7 +57,7 @@
             color: white;
             padding: 12px;
             text-align: center;
-            font-weight: bold;
+            font-weight: normal;
         }
 
 .attendance-table td {
@@ -122,7 +122,7 @@
             flex: 1;
             background: white;
             border-radius: 8px;
-            padding: 20px;
+            padding: 10px;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
@@ -237,3 +237,349 @@
                 padding: 15px;
             }
         }
+
+.summary-tab,
+.leave-header,
+.holiday-header {
+    box-sizing: border-box;
+    width: 100%;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.attendance-table,
+.leave-table,
+.holiday-table {
+    width: 100%;
+}
+
+.attendance-table th,
+.attendance-table td,
+.leave-table th,
+.leave-table td,
+.holiday-table th,
+.holiday-table td {
+    white-space: nowrap;
+}
+
+.leave-credits .leave-section,
+.overtime-sections .overtime-section,
+.holiday-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.leave-header,
+.holiday-header {
+    flex-shrink: 0;
+}
+
+.summary-section,
+.leave-section,
+.holiday-section {
+    position: relative;
+}
+
+.summary-tab,
+.leave-header,
+.holiday-header {
+    position: sticky;
+    left: 0;
+    z-index: 10;
+}
+
+.summary-section > .summary-tab,
+.leave-section > .leave-header,
+.holiday-section > .holiday-header {
+    min-width: 100%;
+}
+
+@media (max-width: 1200px) {
+    .leave-credits,
+    .overtime-sections {
+        gap: 20px;
+    }
+    
+    .summary-tab,
+    .leave-header,
+    .holiday-header {
+        padding: 14px 25px;
+    }
+}
+@media (max-width: 992px) {
+    .page-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .summary-section,
+    .leave-section,
+    .overtime-section,
+    .holiday-section {
+        margin-bottom: 20px;
+    }
+    
+    .export-buttons {
+        float: none;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+    
+    .summary-tab,
+    .leave-header,
+    .holiday-header {
+        padding: 13px 22px;
+        font-size: 15px;
+    }
+    
+}
+@media (max-width: 768px) {
+    .page-title {
+        text-align: center;
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    
+    .leave-credits,
+    .overtime-sections {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .overtime-section {
+        width: 70%;
+        padding: 25px;
+        margin: auto;
+    }
+
+    .export-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .export-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+    
+    .summary-section,
+    .leave-section,
+    .holiday-section {
+        overflow-x: auto;
+        margin: 0 -10px 15px -10px;
+        border-radius: 0;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+    }
+    
+    .summary-section::-webkit-scrollbar,
+    .leave-section::-webkit-scrollbar,
+    .holiday-section::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .summary-section::-webkit-scrollbar-thumb,
+    .leave-section::-webkit-scrollbar-thumb,
+    .holiday-section::-webkit-scrollbar-thumb {
+        background: #445c2b;
+        border-radius: 2px;
+    }
+    
+    .summary-section::after,
+    .leave-section::after,
+    .holiday-section::after {
+        content: '↔';
+        display: block;
+        text-align: center;
+        color: #666;
+        font-size: 16px;
+        padding: 5px 0;
+        opacity: 0.7;
+    }
+    
+    .attendance-table,
+    .leave-table,
+    .holiday-table {
+        min-width: 600px;
+    }
+    
+    .attendance-table th,
+    .attendance-table td,
+    .leave-table th,
+    .leave-table td,
+    .holiday-table th,
+    .holiday-table td {
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    .summary-tab,
+    .holiday-header {
+        padding: 12px 20px;
+        font-size: 14.5px;
+        margin: 0 -10px;
+        width: calc(100% + 20px);
+    }
+    
+    .leave-header {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .leave-credits .leave-section .leave-header,
+    .holiday-section .holiday-header {
+        margin: 0;
+        width: 100%;
+    }
+    
+    .overtime-section {
+        padding: 15px;
+    }
+    
+    .overtime-section h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    
+    .pagination {
+        justify-content: center;
+        padding: 10px;
+    }
+    
+    .show-details-btn {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+    
+    .logout-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-title {
+        font-size: 20px;
+    }
+    
+    .attendance-table,
+    .leave-table,
+    .holiday-table {
+        min-width: 500px;
+    }
+    
+    .attendance-table th,
+    .attendance-table td,
+    .leave-table th,
+    .leave-table td,
+    .holiday-table th,
+    .holiday-table td {
+        padding: 6px;
+        font-size: 11px;
+    }
+    
+    .summary-tab,
+    .holiday-header {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .summary-tab,
+    .leave-header,
+    .holiday-header {
+        padding: 11px 18px;
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    .summary-tab {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    .summary-tab .export-buttons {
+        margin-top: 5px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .export-buttons {
+        gap: 5px;
+    }
+    
+    .export-btn {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+    
+    .pagination {
+        gap: 5px;
+    }
+    
+    .page-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .attendance-table,
+    .leave-table,
+    .holiday-table {
+        min-width: 380px;
+    }
+    
+    .page-title {
+        font-size: 18px;
+    }
+    
+    .summary-tab,
+    .holiday-header {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+    
+    .leave-header {
+        font-size: 13px;
+        padding: 10px;
+    }
+    
+    .summary-tab,
+    .leave-header,
+    .holiday-header {
+        padding: 10px 15px;
+        font-size: 13.5px;
+    }
+    
+    .export-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .export-btn {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+
+@-moz-document url-prefix() {
+    .summary-tab,
+    .leave-header,
+    .holiday-header {
+        width: 100%;
+    }
+}
+@media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) {
+        .summary-tab,
+        .leave-header,
+        .holiday-header {
+            -webkit-backface-visibility: hidden;
+        }
+    }
+}

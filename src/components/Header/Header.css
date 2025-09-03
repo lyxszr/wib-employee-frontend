@@ -108,3 +108,398 @@
             background:#445c2b;
             color: white;
         }
+
+
+.header {
+            background: #445c2b;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+.header-left {
+            display: flex;
+            align-items: center;
+        }
+
+.profile-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #445c2b;
+            font-weight: bold;
+        }
+
+.welcome-text {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+.logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+.logo::before {
+            content: "🏔️";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+.navigation {
+            background: white;
+            border-bottom: 2px solid #ddd;
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+.nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+.nav-link {
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+.nav-link.active {
+            border-bottom-color: #445c2b;
+            color: #445c2b;
+        }
+
+.date-controls {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+.date-input {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+.content {
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+.month-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+.month-btn {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+.month-btn.active {
+            background:#445c2b;
+            color: white;
+        }
+
+
+/* Tablet Responsiveness */
+@media screen and (max-width: 1024px) {
+    .header {
+        padding: 12px 20px;
+    }
+    
+    .profile-icon {
+        width: 36px;
+        height: 36px;
+        margin-right: 12px;
+    }
+    
+    .welcome-text {
+        font-size: 18px;
+    }
+    
+    .logo {
+        font-size: 16px;
+        margin-right: 15px;
+    }
+    
+    .logo::before {
+        font-size: 20px;
+        margin-right: 6px;
+    }
+    
+    .navigation {
+        padding: 8px 20px;
+        gap: 15px;
+    }
+    
+    .nav-links {
+        gap: 20px;
+    }
+    
+    .nav-link {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+    
+    .date-controls {
+        gap: 8px;
+    }
+    
+    .date-input {
+        padding: 4px 8px;
+        font-size: 14px;
+    }
+    
+    .content {
+        padding: 20px;
+    }
+    
+    .month-controls {
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    
+    .month-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+     .header {
+        position: relative;
+        width: 100%;
+        height: 30px; /* adjust as needed */
+    }
+
+    .header-left {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: auto;
+    }
+    
+    .profile-icon {
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+    }
+    
+    .welcome-text {
+        font-size: 16px;
+    }
+    
+     .logo {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 14px;
+    }
+    
+    .logo::before {
+        font-size: 18px;
+        margin-right: 5px;
+    }
+    
+    .navigation {
+        padding: 8px 15px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+    
+    .nav-link {
+        padding: 8px 12px;
+        font-size: 11px;
+        text-align: center;
+        flex: 1;
+        min-width: 80px;
+    }
+    
+    .date-controls {
+        margin-left: 0;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    
+    .date-input {
+        padding: 6px 8px;
+        font-size: 13px;
+        flex: 1;
+        min-width: 120px;
+    }
+    
+    .content {
+        padding: 15px;
+    }
+    
+    .month-controls {
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 15px;
+        justify-content: center;
+    }
+    
+    .month-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+        flex: 1;
+        min-width: 70px;
+    }
+}
+
+/* Small Mobile Screens */
+@media screen and (max-width: 480px) {
+    .header {
+        padding: 8px 10px;
+    }
+    
+    .profile-icon {
+        width: 28px;
+        height: 28px;
+        margin-right: 8px;
+    }
+    
+    .welcome-text {
+        font-size: 14px;
+    }
+    
+    .logo {
+        font-size: 12px;
+    }
+    
+    .logo::before {
+        font-size: 16px;
+        margin-right: 4px;
+    }
+    
+    .navigation {
+        padding: 6px 10px;
+    }
+    
+    .nav-links {
+        gap: 5px;
+    }
+    
+    .nav-link {
+        padding: 6px 8px;
+        min-width: 60px;
+    }
+    
+    .date-input {
+        padding: 5px 6px;
+        font-size: 12px;
+        min-width: 100px;
+    }
+    
+    .content {
+        padding: 10px;
+    }
+    
+    .month-controls {
+        gap: 4px;
+        margin-bottom: 12px;
+    }
+    
+    .month-btn {
+        padding: 5px 8px;
+        font-size: 12px;
+        min-width: 60px;
+    }
+}
+
+/* Extra Small Screens */
+@media screen and (max-width: 320px) {
+    .header {
+        padding: 6px 8px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .header-left {
+        flex: 1;
+        justify-content: flex-start;
+        max-width: 70%;
+    }
+    
+    .logo {
+        flex-shrink: 0;
+        margin-left: 5px;
+    }
+    
+    .profile-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 6px;
+    }
+    
+    .welcome-text {
+        font-size: 12px;
+    }
+    
+    .logo {
+        font-size: 11px;
+    }
+    
+    .logo::before {
+        font-size: 14px;
+        margin-right: 3px;
+    }
+    
+    .navigation {
+        padding: 5px 8px;
+    }
+    
+    .nav-link {
+        padding: 5px 6px;
+        font-size: 10px;
+        min-width: 50px;
+    }
+    
+    .date-input {
+        padding: 4px 5px;
+        font-size: 11px;
+        min-width: 90px;
+    }
+    
+    .content {
+        padding: 8px;
+    }
+    
+    .month-btn {
+        padding: 4px 6px;
+        font-size: 11px;
+        min-width: 50px;
+    }
+}
