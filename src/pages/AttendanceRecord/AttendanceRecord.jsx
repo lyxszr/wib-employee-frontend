@@ -1,42 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./AttendanceRecord.css";
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import "./AttendanceRecord.css"
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 const AttendanceRecord = () => {
-  const [time, setTime] = useState("");
-  const [date, setDate] = useState("");
-  const [email, setEmail] = useState(""); // new state
-  const [password, setPassword] = useState(""); // new state
-  const navigate = useNavigate();
+  const [time, setTime] = useState("")
+  const [date, setDate] = useState("")
+  const [email, setEmail] = useState("") // new state
+  const [password, setPassword] = useState("") // new state
+  const navigate = useNavigate()
 
   useEffect(() => {
     const updateDateTime = () => {
-      const now = new Date();
+      const now = new Date()
 
       const timeString = now.toLocaleTimeString("en-US", {
         hour: "numeric",
         minute: "2-digit",
         second: "2-digit",
         hour12: true,
-      });
+      })
 
       const dateString = now.toLocaleDateString("en-US", {
         weekday: "long",
         day: "2-digit",
         month: "short",
         year: "numeric",
-      });
+      })
 
       setTime(timeString);
       setDate(`Today is ${dateString}`);
-    };
+    }
 
     updateDateTime();
-    const interval = setInterval(updateDateTime, 1000);
+    const interval = setInterval(updateDateTime, 1000)
 
-    return () => clearInterval(interval); // cleanup
-  }, []);
+    return () => clearInterval(interval) // cleanup
+  }, [])
 
  
   // Mutation for Time In
@@ -46,17 +46,17 @@ const AttendanceRecord = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
-      });
-      if (!res.ok) throw new Error('Failed to time in');
-      return res.json();
+      })
+      if (!res.ok) throw new Error('Failed to time in')
+      return res.json()
     },
     // Optionally, you can add onSuccess/onError handlers here
-  });
+  })
 
   const handleTimeIn = () => {
-    timeInMutation.mutate({ email, password });
-  };
-
+    timeInMutation.mutate({ email, password })
+  
+  }
   return (
     <div className="container">
       {/* Left Panel */}
@@ -68,7 +68,7 @@ const AttendanceRecord = () => {
 
       {/* Right Panel */}
       <div className="right-panel">
-        <a onClick={() => navigate("/authentication")} className="signup-header">
+        <a onClick={() => navigate("/dashboard")} className="signup-header">
           Sign in
         </a>
 
@@ -117,7 +117,7 @@ const AttendanceRecord = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AttendanceRecord;
+export default AttendanceRecord
