@@ -179,7 +179,7 @@ const ProfileSettings = () => {
     return (
         <div className="containers">
             {/* Header */}
-            <div className="headers">
+            <div className="mainheaders">
                 <h1>Profile Settings</h1>
                 <p>Manage your account settings and preferences</p>
             </div>
