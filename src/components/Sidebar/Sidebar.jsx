@@ -68,7 +68,7 @@ const ProfileSidebar = ({ isOpen, onClose }) => {
       {/* Sidebar */}
       <div className={`profile-sidebar ${isOpen ? 'open' : ''}`}>
         {/* Header with close button */}
-        <div className="profile-sidebar-header">
+        <div className="profile-sidebar-headers">
           <h2 className="sidebar-title">Profile</h2>
           <button 
             className="close-button" 
@@ -128,15 +128,6 @@ const ProfileSidebar = ({ isOpen, onClose }) => {
             Edit Profile Settings
           </button>
 
-          <button 
-            className="action-button"
-            onClick={() => handleNavigation('/account')}
-          >
-            <svg className="action-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            Account Settings
-          </button>
 
           <button 
             className="action-button"

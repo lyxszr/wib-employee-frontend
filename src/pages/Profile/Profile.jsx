@@ -177,9 +177,9 @@ const ProfileSettings = () => {
     )
 
     return (
-        <div className="container">
+        <div className="containers">
             {/* Header */}
-            <div className="header">
+            <div className="headers">
                 <h1>Profile Settings</h1>
                 <p>Manage your account settings and preferences</p>
             </div>
@@ -219,7 +219,7 @@ const ProfileSettings = () => {
                 <div className="settings-main">
                     {/* Profile Information */}
                     <div className="card">
-                        <div className="section-header">
+                        <div className="section-headers">
                             <h2>Profile Information</h2>
                             <button className="edit-button" onClick={() => toggleEdit('profile')}>
                                 <svg className="edit-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -279,7 +279,7 @@ const ProfileSettings = () => {
 
                     {/* Change Password */}
                     <div className="card">
-                        <div className="section-header">
+                        <div className="section-headers">
                             <h2>Change Password</h2>
                             <button className="edit-button" onClick={() => toggleEdit('password')}>
                                 <svg className="edit-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
