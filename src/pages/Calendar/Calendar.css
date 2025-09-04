@@ -131,8 +131,8 @@
     }
 
     .time-label {
-        font-size: 10px;
-        font-weight: 500;
+        font-size: 8px;
+        font-weight: 200;
         color: #6c757d;
         width: 20px;
         text-transform: uppercase;
@@ -364,7 +364,7 @@
     }
 
     .time-label {
-        font-size: 10px;
+        font-size: 8px;
         font-weight: 500;
         color: #6c757d;
         width: 20px;
@@ -374,7 +374,7 @@
 
     .time-input {
         flex: 1;
-        padding: 4px 6px;
+        padding: 4px 5px;
         border: 1px solid #e9ecef;
         border-radius: 4px;
         font-size: 11px;
@@ -453,7 +453,8 @@
         
         .time-label {
             width: 22px;
-            font-size: 11px;
+            font-size: 10px;
+            font-weight: bold;
         }
         
         .approval-status {
@@ -595,7 +596,8 @@
         
         .time-label {
             width: 16px;
-            font-size: 9px;
+            font-size: 7px;
+            font-weight: bold;
         }
         
         .approval-section {
@@ -766,7 +768,8 @@
         
         .time-label {
             width: 12px;
-            font-size: 7px;
+            font-size: 5px;
+            font-weight: bold;
         }
         
         .approval-section {
