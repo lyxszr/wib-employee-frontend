@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import ProfileSidebar from "../Sidebar/Sidebar"
 import "./Header.css"
 
 // This Header component expects year (number), month (string), setYear, setMonth, months as props from parent
@@ -16,27 +17,61 @@ const Header = ({
   ]
 }) => {
   const navigate = useNavigate();
+  const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false);
 
   // Defensive: ensure month is a string and in months array
   const safeMonth = typeof month === "string" && months.includes(month)
     ? month
     : months[0]
 
+  // Toggle profile sidebar
+  const toggleProfileSidebar = () => {
+    setIsProfileSidebarOpen(!isProfileSidebarOpen);
+  };
+
+  // Close profile sidebar
+  const closeProfileSidebar = () => {
+    setIsProfileSidebarOpen(false);
+  };
+
+  // Handle logout from main navigation
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    navigate('/');
+  };
+
   return (
     <>
       <header className="header">
         <div className="header-left">
-          <div className="profile-icon" role="img" aria-label="profile">👤</div>
+          <div 
+            className="profile-icon-trigger" 
+            onClick={toggleProfileSidebar}
+            role="button"
+            aria-label="Open profile menu"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleProfileSidebar();
+              }
+            }}
+          >
+            <div className="profile-icon">👤</div>
+            <div className="profile-indicator">
+              <span className="status-dot online"></span>
+            </div>
+          </div>
           <div className="welcome-text">
             Welcome, <span id="userName">Juan Dela Cruz</span>!
           </div>
         </div>
-  <img 
-    src="WIB LOGO.png" 
-    alt="When in Baguio Logo" 
-    className="logo-img" 
-  />
-
+        
+        <img 
+          src="WIB LOGO.png" 
+          alt="When in Baguio Logo" 
+          className="logo-img" 
+        />
       </header>
 
       <nav className="navigation">
@@ -68,7 +103,7 @@ const Header = ({
           <button
             type="button"
             className="nav-link"
-            onClick={() => navigate("/")}
+            onClick={handleLogout}
             style={{ background: "none", border: "none", padding: 0, margin: 0, cursor: "pointer" }}
           >
             LOGOUT
@@ -97,7 +132,14 @@ const Header = ({
           </div>
         )}
       </nav>
+
+      {/* Profile Sidebar */}
+      <ProfileSidebar 
+        isOpen={isProfileSidebarOpen} 
+        onClose={closeProfileSidebar} 
+      />
     </>
   )
 };
+
 export default Header
