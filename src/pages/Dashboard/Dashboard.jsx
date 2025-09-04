@@ -7,9 +7,10 @@ const Dashboard = () => {
   const [year, setYear] = useState(2025)
   const [month, setMonth] = useState("September")
   const [activeMonthBtn, setActiveMonthBtn] = useState("Current Month")
-  const [activeNav, setActiveNav] = useState("CALENDAR")
+  const [activeNav, setActiveNav] = useState("DASHBOARD") // Changed from "CALENDAR" to "DASHBOARD"
   const navigate = useNavigate()
 
+  
   const handleMonthBtnClick = (btn) => setActiveMonthBtn(btn)
   const handleNavClick = (nav) => {
     setActiveNav(nav)

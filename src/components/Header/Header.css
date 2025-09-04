@@ -1,94 +1,103 @@
-.header {
-            background: #445c2b;
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+  .header {
+              background: #445c2b;
+              color: white;
+              padding: 15px 30px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+          }
 
-.header-left {
-            display: flex;
-            align-items: center;
-        }
+  .header-left {
+              display: flex;
+              align-items: center;
+              margin-left: 10px;
+          }
 
-.profile-icon {
-            width: 40px;
-            height: 40px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            color: #445c2b;
-            font-weight: bold;
-        }
+  .profile-icon {
+              width: 40px;
+              height: 40px;
+              background: white;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 15px;
+              color: #445c2b;
+              font-weight: bold;
+          }
 
-.welcome-text {
-            font-size: 20px;
-            font-weight: bold;
-        }
+  .welcome-text {
+              font-size: 20px;
+              font-weight: bold;
+          }
+  .logo-img {
+    height: 40px; /* adjust as needed */
+    object-fit: contain;
+  }
 
-.logo {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 18px;
-        }
+  .navigation {
+              background: white;
+              border-bottom: 2px solid #ddd;
+              padding: 10px 30px;
+              display: flex;
+              align-items: center;
+              flex-wrap: wrap;
+              gap: 20px;
+          }
 
-.logo::before {
-            content: "🏔️";
-            margin-right: 8px;
-            font-size: 24px;
-        }
+  .nav-links {
+              display: flex;
+              gap: 30px;
+          }
 
-.navigation {
-            background: white;
-            border-bottom: 2px solid #ddd;
-            padding: 10px 30px;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+  .nav-link {
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+    font-weight: normal; /* not bold by default */
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+  }
 
-.nav-links {
-            display: flex;
-            gap: 30px;
-        }
+  .nav-link.active {
+    border-bottom-color: #445c2b;
+    color: #445c2b;
+    font-weight: bolder;/* active nav is bold */
+  }
 
-.nav-link {
-            padding: 8px 16px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
+  .date-controls {
+              display: flex;
+              gap: 10px;
+              margin-left: auto;
+          }
 
-.nav-link.active {
-            border-bottom-color: #445c2b;
-            color: #445c2b;
-        }
+  .date-input {
+              padding: 5px 10px;
+              border: 1px solid #ddd;
+              border-radius: 3px;
+          }
 
-.date-controls {
-            display: flex;
-            gap: 10px;
-            margin-left: auto;
-        }
+  .content {
+              padding: 30px;
+              max-width: 1400px;
+              margin: 0 auto;
+          }
 
-.date-input {
-            padding: 5px 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-        }
+  .month-controls {
+              display: flex;
+              gap: 10px;
+              margin-bottom: 30px;
+              justify-content: flex-start;
+          }
 
-.content {
-            padding: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+  .month-btn {
+              padding: 10px 20px;
+              border: 1px solid #ddd;
+              background: white;
+              cursor: pointer;
+              transition: all 0.3s;
+          }
+
 
 .month-controls {
             display: flex;
@@ -503,3 +512,7 @@
         min-width: 50px;
     }
 }
+  .month-btn.active {
+              background:#445c2b;
+              color: white;
+          }

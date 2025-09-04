@@ -40,7 +40,7 @@ const Authentication = () => {
       </div>
 
       <div className="right-panel">
-        <button onClick={() => navigate("/authentication")} className="time-in-header">Time In</button>
+        <button onClick={() => navigate("/attendance-record")} className="time-in-header">Time In</button>
 
         <div className="logo-section">
           <img src="WIB LOGO.png" className="baguio-logo" alt="WIB Logo" />

@@ -50,6 +50,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 30px;
+            
         }
 
 .attendance-table th {
@@ -58,12 +59,15 @@
             padding: 12px;
             text-align: center;
             font-weight: normal;
+            font-weight: bold;
+                  
         }
 
 .attendance-table td {
             padding: 12px;
             text-align: center;
             border-bottom: 1px solid #ddd;
+            font-size: 12px;  
         }
 
 .attendance-table tr:nth-child(even) {

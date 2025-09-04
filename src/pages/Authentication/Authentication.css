@@ -131,7 +131,11 @@
 }
 
 .btn-login {
+
   width: 80%;
+
+  width: 200px;
+
   padding: 15px;
   background-color: #4CAF50;
   color: #fff;

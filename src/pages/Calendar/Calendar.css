@@ -6,16 +6,25 @@
         box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
 
+
     .calendar-header {
         background: #f8f9fa;
         padding: 20px;
         border-bottom: 1px solid #e9ecef;
+
+    /*.header {
+        background: #445c2b;
+        color: white;
+        padding: 15px 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
         gap: 15px;
     }
+
+    }*/
+
 
     .navigation-controls {
         display: flex;
@@ -154,12 +163,14 @@
         box-shadow: 0 0 0 2px rgba(68, 92, 43, 0.1);
     }
 
+
     .approval-section {
         margin-top: 8px;
         display: flex;
         align-items: center;
         gap: 5px;
     }
+
 
     .approval-checkbox {
         width: 14px;

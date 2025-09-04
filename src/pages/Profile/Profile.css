@@ -1,0 +1,256 @@
+.containers {
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+
+        .headers {
+            margin-bottom: 2rem;
+        }
+
+        .headers h1 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .headers p {
+            color: #6b7280;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            border: 1px solid #f3f4f6;
+            padding: 1.5rem;
+        }
+
+        .profile-card {
+            text-align: center;
+        }
+
+        @media (min-width: 1024px) {
+            .profile-card {
+                position: sticky;
+                top: 1rem;
+            }
+        }
+
+        .profile-image-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .profile-image {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-button {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: white;
+            border-radius: 50%;
+            padding: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+
+        .camera-button:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .camera-icon {
+            width: 1rem;
+            height: 1rem;
+            color: #6b7280;
+        }
+
+        #imageUpload {
+            display: none;
+        }
+
+        .profile-info h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-info p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .section-headers {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-headers h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .edit-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            color: #2563eb;
+            background: transparent;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .edit-button:hover {
+            background: #dbeafe;
+        }
+
+        .edit-icon {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 95%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-input:disabled {
+            background: #f9fafb;
+            border-color: #e5e7eb;
+            color: #6b7280;
+        }
+
+        .password-input-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .password-toggle:hover {
+            color: #6b7280;
+        }
+
+        .eye-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .save-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+
+        .save-button:hover {
+            background: #1d4ed8;
+        }
+
+        .save-icon {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .password-info {
+            color: #6b7280;
+        }
+
+        .password-info p {
+            margin-bottom: 0.25rem;
+        }
+
+        .password-info .small {
+            font-size: 0.875rem;
+        }
+
+        .settings-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .settings-main {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
