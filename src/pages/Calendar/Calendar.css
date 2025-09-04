@@ -3,14 +3,14 @@
         display: block;
     }
 
-    .header {
+    /*.header {
         background: #445c2b;
         color: white;
         padding: 15px 30px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-    }
+    }*/
 
     .header-left {
         display: flex;
