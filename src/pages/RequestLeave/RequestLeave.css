@@ -1,5 +1,5 @@
 /* Main Content */
-.main-content {
+.main-contents {
   display: flex;
   min-height: calc(100vh - 150px);
   padding: 40px;
