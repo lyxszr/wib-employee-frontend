@@ -14,15 +14,12 @@ const RequestLeave = () => {
   const [month, setMonth] = useState(months[new Date().getMonth()]);
   const [activeNav, setActiveNav] = useState("REQUEST LEAVE");
   const [formData, setFormData] = useState({
-    employeeId: "",
-    fullName: "",
-    department: "",
     reason: "",
     startDate: "",
     endDate: "",
   })
 
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   // React Query mutation for submitting leave request
@@ -39,9 +36,6 @@ const RequestLeave = () => {
     onSuccess: () => {
       alert("Leave request submitted successfully!");
       setFormData({
-        employeeId: "",
-        fullName: "",
-        department: "",
         reason: "",
         startDate: "",
         endDate: "",
@@ -100,59 +94,11 @@ const RequestLeave = () => {
       />
 
       {/* Main Form Content */}
-      <main className="content">
+      <main className="contents">
         <div className="form-container">
           <h1 className="form-title">Request Leave</h1>
 
           <form onSubmit={handleSubmit}>
-            {/* Employee ID */}
-            <div className="form-group">
-              <label className="form-label">Employee ID</label>
-              <input
-                type="text"
-                name="employeeId"
-                className={`form-input ${errors.employeeId ? "error" : ""}`}
-                placeholder="Enter your Employee ID"
-                value={formData.employeeId}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            {/* Full Name and Department */}
-            <div className="form-row">
-              <div className="form-group">
-                <label className="form-label">Full Name</label>
-                <input
-                  type="text"
-                  name="fullName"
-                  className={`form-input ${errors.fullName ? "error" : ""}`}
-                  placeholder="Enter your full name"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label className="form-label">Department</label>
-                <select
-                  name="department"
-                  className={`form-select ${errors.department ? "error" : ""}`}
-                  value={formData.department}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Select Department</option>
-                  <option value="hr">Human Resources</option>
-                  <option value="it">Information Technology</option>
-                  <option value="finance">Finance</option>
-                  <option value="marketing">Marketing</option>
-                  <option value="operations">Operations</option>
-                  <option value="sales">Sales</option>
-                </select>
-              </div>
-            </div>
-
             {/* Reason for Leave */}
             <div className="form-group full-width">
               <label className="form-label">Reason for Leave</label>
