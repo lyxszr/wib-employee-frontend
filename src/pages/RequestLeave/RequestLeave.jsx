@@ -146,7 +146,7 @@ const RequestLeave = () => {
               style={{
                 background: leaveRequestMutation.isSuccess
                   ? "linear-gradient(135deg, #38a169, #2f855a)"
-                  : "linear-gradient(135deg, #667eea, #764ba2)",
+                  : "",
               }}
             >
               {leaveRequestMutation.isLoading
