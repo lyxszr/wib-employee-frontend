@@ -16,7 +16,7 @@ const Header = ({
     "July", "August", "September", "October", "November", "December"
   ]
 }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false);
 
   // Defensive: ensure month is a string and in months array
@@ -26,18 +26,18 @@ const Header = ({
 
   // Toggle profile sidebar
   const toggleProfileSidebar = () => {
-    setIsProfileSidebarOpen(!isProfileSidebarOpen);
+    setIsProfileSidebarOpen(!isProfileSidebarOpen)
   };
 
   // Close profile sidebar
   const closeProfileSidebar = () => {
-    setIsProfileSidebarOpen(false);
+    setIsProfileSidebarOpen(false)
   };
 
   // Handle logout from main navigation
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    navigate('/');
+    localStorage.removeItem('authToken')
+    navigate('/authentication')
   };
 
   return (
@@ -140,6 +140,6 @@ const Header = ({
       />
     </>
   )
-};
+}
 
 export default Header
