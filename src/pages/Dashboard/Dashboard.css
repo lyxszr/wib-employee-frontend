@@ -583,7 +583,8 @@
         .summary-tab,
         .leave-header,
         .holiday-header {
-            -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;       /* Standard property */
+           -webkit-backface-visibility: hidden; /* Vendor prefix (for older browsers) */
         }
     }
 }
