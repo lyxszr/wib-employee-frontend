@@ -1,240 +1,188 @@
-  .header {
-              background: #445c2b;
-              color: white;
-              padding: 15px 30px;
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-          }
+/* Base Styles */
+.header {
+    background: #445c2b;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 60px;
+    position: relative;
+}
 
-  .header-left {
-              display: flex;
-              align-items: center;
-              margin-left: 10px;
-          }
+.header-left {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
 
-  .profile-icon {
-              width: 40px;
-              height: 40px;
-              background: white;
-              border-radius: 50%;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              margin-right: 15px;
-              color: #445c2b;
-              font-weight: bold;
-          }
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: #445c2b;
+    font-weight: bold;
+    flex-shrink: 0;
+}
 
-  .welcome-text {
-              font-size: 20px;
-              font-weight: bold;
-          }
-  .logo-img {
-    height: 40px; /* adjust as needed */
+.welcome-text {
+    font-size: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.logo::before {
+    content: "🏔️";
+    margin-right: 8px;
+    font-size: 24px;
+}
+
+.logo-img {
+    height: 40px;
     object-fit: contain;
-  }
+}
 
-  .navigation {
-              background: white;
-              border-bottom: 2px solid #ddd;
-              padding: 10px 30px;
-              display: flex;
-              align-items: center;
-              flex-wrap: wrap;
-              gap: 20px;
-          }
+.navigation {
+    background: white;
+    border-bottom: 2px solid #ddd;
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    min-height: 60px;
+}
 
-  .nav-links {
-              display: flex;
-              gap: 30px;
-          }
+.nav-links {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
 
-  .nav-link {
+.nav-link {
     padding: 8px 16px;
     text-decoration: none;
     color: #333;
-    font-weight: normal; /* not bold by default */
+    font-weight: normal;
     border-bottom: 3px solid transparent;
-    transition: all 0.3s;
-  }
-
-  .nav-link.active {
-    border-bottom-color: #445c2b;
-    color: #445c2b;
-    font-weight: bolder;/* active nav is bold */
-  }
-
-  .date-controls {
-              display: flex;
-              gap: 10px;
-              margin-left: auto;
-          }
-
-  .date-input {
-              padding: 5px 10px;
-              border: 1px solid #ddd;
-              border-radius: 3px;
-          }
-
-  .content {
-              padding: 30px;
-              max-width: 1400px;
-              margin: 0 auto;
-          }
-
-  .month-controls {
-              display: flex;
-              gap: 10px;
-              margin-bottom: 30px;
-              justify-content: flex-start;
-          }
-
-  .month-btn {
-              padding: 10px 20px;
-              border: 1px solid #ddd;
-              background: white;
-              cursor: pointer;
-              transition: all 0.3s;
-          }
-
-
-.month-controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-.month-btn {
-            padding: 10px 20px;
-            border: 1px solid #ddd;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-.month-btn.active {
-            background:#445c2b;
-            color: white;
-        }
-
-
-.header {
-            background: #445c2b;
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-.header-left {
-            display: flex;
-            align-items: center;
-        }
-
-.profile-icon {
-            width: 40px;
-            height: 40px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            color: #445c2b;
-            font-weight: bold;
-        }
-
-.welcome-text {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-.logo {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-.logo::before {
-            content: "🏔️";
-            margin-right: 8px;
-            font-size: 24px;
-        }
-
-.navigation {
-            background: white;
-            border-bottom: 2px solid #ddd;
-            padding: 10px 30px;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-.nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-.nav-link {
-            padding: 8px 16px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
 
 .nav-link.active {
-            border-bottom-color: #445c2b;
-            color: #445c2b;
-        }
+    border-bottom-color: #445c2b;
+    color: #445c2b;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #445c2b;
+}
 
 .date-controls {
-            display: flex;
-            gap: 10px;
-            margin-left: auto;
-        }
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+    flex-wrap: wrap;
+}
 
 .date-input {
-            padding: 5px 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-        }
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+    min-width: 120px;
+}
 
 .content {
-            padding: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
 .month-controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
 
 .month-btn {
-            padding: 10px 20px;
-            border: 1px solid #ddd;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+    font-size: 14px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.month-btn:hover {
+    background: #f5f5f5;
+}
 
 .month-btn.active {
-            background:#445c2b;
-            color: white;
-        }
+    background: #445c2b;
+    color: white;
+    border-color: #445c2b;
+}
 
+/* Large Desktop (1200px and up) */
+@media screen and (min-width: 1200px) {
+    .content {
+        padding: 40px;
+    }
+    
+    .header {
+        padding: 20px 40px;
+    }
+    
+    .navigation {
+        padding: 15px 40px;
+    }
+}
 
-/* Tablet Responsiveness */
-@media screen and (max-width: 1024px) {
+/* Desktop to Tablet (1024px - 1199px) */
+@media screen and (max-width: 1199px) and (min-width: 1024px) {
+    .header {
+        padding: 15px 25px;
+    }
+    
+    .navigation {
+        padding: 12px 25px;
+    }
+    
+    .content {
+        padding: 25px;
+    }
+    
+    .nav-links {
+        gap: 25px;
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media screen and (max-width: 1023px) and (min-width: 768px) {
     .header {
         padding: 12px 20px;
+        min-height: 55px;
     }
     
     .profile-icon {
@@ -249,7 +197,6 @@
     
     .logo {
         font-size: 16px;
-        margin-right: 15px;
     }
     
     .logo::before {
@@ -258,7 +205,7 @@
     }
     
     .navigation {
-        padding: 8px 20px;
+        padding: 10px 20px;
         gap: 15px;
     }
     
@@ -277,7 +224,8 @@
     
     .date-input {
         padding: 4px 8px;
-        font-size: 14px;
+        font-size: 13px;
+        min-width: 100px;
     }
     
     .content {
@@ -291,23 +239,22 @@
     
     .month-btn {
         padding: 8px 16px;
-        font-size: 14px;
+        font-size: 13px;
+        min-width: 70px;
     }
 }
 
-/* Mobile Responsiveness */
-@media screen and (max-width: 768px) {
-     .header {
-        position: relative;
-        width: 100%;
-        height: 30px; /* adjust as needed */
+/* Mobile Large (481px - 767px) */
+@media screen and (max-width: 767px) and (min-width: 481px) {
+    .header {
+        padding: 10px 15px;
+        min-height: 50px;
+        flex-direction: row;
     }
-
+    
     .header-left {
-        position: absolute;
-        bottom: 10px;
-        left: 0;
-        width: auto;
+        flex: 1;
+        min-width: 0;
     }
     
     .profile-icon {
@@ -320,11 +267,9 @@
         font-size: 16px;
     }
     
-     .logo {
-        position: absolute;
-        top: 0;
-        right: 25px;
+    .logo {
         font-size: 14px;
+        margin-left: 10px;
     }
     
     .logo::before {
@@ -337,35 +282,38 @@
         flex-direction: column;
         align-items: stretch;
         gap: 10px;
+        min-height: auto;
     }
     
     .nav-links {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 8px;
         justify-content: center;
     }
     
     .nav-link {
-        padding: 8px 12px;
-        font-size: 11px;
+        padding: 6px 10px;
+        font-size: 12px;
         text-align: center;
-        flex: 1;
-        min-width: 80px;
+        flex: 1 1 auto;
+        min-width: 70px;
+        max-width: 120px;
     }
     
     .date-controls {
         margin-left: 0;
         justify-content: center;
         gap: 8px;
-        flex-wrap: wrap;
+        width: 100%;
     }
     
     .date-input {
         padding: 6px 8px;
-        font-size: 13px;
+        font-size: 12px;
         flex: 1;
-        min-width: 120px;
+        min-width: 100px;
+        max-width: 150px;
     }
     
     .content {
@@ -381,16 +329,18 @@
     
     .month-btn {
         padding: 6px 12px;
-        font-size: 13px;
-        flex: 1;
-        min-width: 70px;
+        font-size: 12px;
+        flex: 1 1 auto;
+        min-width: 60px;
+        max-width: 100px;
     }
 }
 
-/* Small Mobile Screens */
-@media screen and (max-width: 480px) {
+/* Mobile Small (321px - 480px) */
+@media screen and (max-width: 480px) and (min-width: 321px) {
     .header {
-        padding: 8px 10px;
+        padding: 8px 12px;
+        min-height: 45px;
     }
     
     .profile-icon {
@@ -405,6 +355,7 @@
     
     .logo {
         font-size: 12px;
+        margin-left: 8px;
     }
     
     .logo::before {
@@ -413,7 +364,8 @@
     }
     
     .navigation {
-        padding: 6px 10px;
+        padding: 6px 12px;
+        gap: 8px;
     }
     
     .nav-links {
@@ -421,18 +373,21 @@
     }
     
     .nav-link {
-        padding: 6px 8px;
-        min-width: 60px;
+        padding: 5px 8px;
+        font-size: 11px;
+        min-width: 55px;
+        max-width: 90px;
     }
     
     .date-input {
         padding: 5px 6px;
-        font-size: 12px;
-        min-width: 100px;
+        font-size: 11px;
+        min-width: 80px;
+        max-width: 120px;
     }
     
     .content {
-        padding: 10px;
+        padding: 12px;
     }
     
     .month-controls {
@@ -442,29 +397,22 @@
     
     .month-btn {
         padding: 5px 8px;
-        font-size: 12px;
-        min-width: 60px;
+        font-size: 11px;
+        min-width: 50px;
+        max-width: 80px;
     }
 }
 
-/* Extra Small Screens */
+/* Mobile Extra Small (320px and below) */
 @media screen and (max-width: 320px) {
     .header {
         padding: 6px 8px;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        min-height: 40px;
     }
     
     .header-left {
         flex: 1;
-        justify-content: flex-start;
-        max-width: 70%;
-    }
-    
-    .logo {
-        flex-shrink: 0;
-        margin-left: 5px;
+        min-width: 0;
     }
     
     .profile-icon {
@@ -478,7 +426,8 @@
     }
     
     .logo {
-        font-size: 11px;
+        font-size: 10px;
+        margin-left: 5px;
     }
     
     .logo::before {
@@ -488,31 +437,72 @@
     
     .navigation {
         padding: 5px 8px;
+        gap: 6px;
+    }
+    
+    .nav-links {
+        gap: 3px;
     }
     
     .nav-link {
-        padding: 5px 6px;
+        padding: 4px 6px;
         font-size: 10px;
-        min-width: 50px;
+        min-width: 45px;
+        max-width: 70px;
     }
     
     .date-input {
         padding: 4px 5px;
-        font-size: 11px;
-        min-width: 90px;
+        font-size: 10px;
+        min-width: 70px;
+        max-width: 100px;
     }
     
     .content {
         padding: 8px;
     }
     
+    .month-controls {
+        gap: 3px;
+        margin-bottom: 10px;
+    }
+    
     .month-btn {
         padding: 4px 6px;
-        font-size: 11px;
-        min-width: 50px;
+        font-size: 10px;
+        min-width: 40px;
+        max-width: 65px;
     }
 }
-  .month-btn.active {
-              background:#445c2b;
-              color: white;
-          }
+
+/* Utility classes for better flexibility */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus states for accessibility */
+.nav-link:focus,
+.month-btn:focus,
+.date-input:focus {
+    outline: 2px solid #445c2b;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .nav-link.active {
+        border-bottom-width: 4px;
+    }
+    
+    .month-btn.active {
+        border-width: 2px;
+    }
+}
