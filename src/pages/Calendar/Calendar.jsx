@@ -25,7 +25,7 @@ const Calendar = () => {
     } else if (nav === "REQUEST LEAVE") {
       navigate("/request-leave")
     } else if (nav === "LOGOUT") {
-      navigate("/")
+      navigate("/authentication")
     }
   }
 
