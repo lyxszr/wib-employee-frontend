@@ -1,28 +1,56 @@
 .containers {
-            max-width: 1024px;
+            max-width: 95%;
             margin: 0 auto;
         }
 
-        .headers {
+.headers {
             margin-bottom: 2rem;
         }
 
-        .headers h1 {
+.headers h1 {
             font-size: 1.875rem;
             font-weight: 700;
             color: #1f2937;
             margin-bottom: 0.5rem;
         }
 
-        .headers p {
+.headers p {
             color: #6b7280;
         }
 
-        .grid {
+.grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
         }
+
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: transparent;
+    border: none;
+    color: #000000;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    width: fit-content;
+}
+
+.back-button:hover {
+    background: #f3f4f6;
+    color: #374151;
+    transform: translateX(-2px);
+}
+
+.back-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
 
         @media (min-width: 1024px) {
             .grid {
@@ -35,7 +63,7 @@
             border-radius: 1rem;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
             border: 1px solid #f3f4f6;
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         .profile-card {

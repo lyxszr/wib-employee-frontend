@@ -24,21 +24,29 @@ const ProfileSettings = () => {
         currentPassword: false,
         newPassword: false,
         confirmPassword: false
-    });
+    })
 
-    const [profileImage, setProfileImage] = useState(null);
+    const [profileImage, setProfileImage] = useState(null)
 
     // Helper function to get initials
     const getInitials = (name) => {
-        return name.split(' ').map(n => n[0]).join('').toUpperCase();
-    };
+        return name.split(' ').map(n => n[0]).join('').toUpperCase()
+    }
+
+    // Handle back button click
+    const handleBackClick = () => {
+        // You can customize this behavior based on your needs
+        window.history.back()
+        // Or navigate to a specific route if using React Router:
+        // navigate('/dashboard')
+    }
 
     // Toggle edit mode for sections
     const toggleEdit = (section) => {
         setEditingStates(prev => ({
             ...prev,
             [section]: !prev[section]
-        }));
+        }))
 
         // Clear password fields when canceling password edit
         if (section === 'password' && editingStates.password) {
@@ -46,17 +54,17 @@ const ProfileSettings = () => {
                 currentPassword: '',
                 newPassword: '',
                 confirmPassword: ''
-            });
+            })
         }
-    };
+    }
 
     // Handle profile input changes
     const handleProfileChange = (field, value) => {
         setProfileData(prev => ({
             ...prev,
             [field]: value
-        }));
-    };
+        }))
+    }
 
     // Handle password input changes
     const handlePasswordChange = (field, value) => {
@@ -70,21 +78,21 @@ const ProfileSettings = () => {
     const saveProfile = async () => {
         try {
             // Here you would typically make an API call to update the profile
-            const token = localStorage.getItem('authToken');
+            const token = localStorage.getItem('authToken')
             const response = await fetch('http://localhost:5000/api/profile', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}` // Fixed template literal
                 },
                 body: JSON.stringify(profileData)
-            });
+            })
 
             if (response.ok) {
-                alert('Profile updated successfully!');
-                toggleEdit('profile');
+                alert('Profile updated successfully!')
+                toggleEdit('profile')
             } else {
-                const errorData = await response.json();
+                const errorData = await response.json()
                 alert(errorData.message || 'Failed to update profile')
             }
         } catch (error) {
@@ -99,66 +107,66 @@ const ProfileSettings = () => {
 
         // Basic validation
         if (!currentPassword || !newPassword || !confirmPassword) {
-            alert('Please fill in all password fields');
-            return;
+            alert('Please fill in all password fields')
+            return
         }
 
         if (newPassword !== confirmPassword) {
-            alert('New passwords do not match');
-            return;
+            alert('New passwords do not match')
+            return
         }
 
         if (newPassword.length < 6) {
-            alert('New password must be at least 6 characters long');
-            return;
+            alert('New password must be at least 6 characters long')
+            return
         }
 
         try {
             // Here you would typically make an API call to change the password
-            const token = localStorage.getItem('authToken');
+            const token = localStorage.getItem('authToken')
             const response = await fetch('http://localhost:5000/api/auth/change-password', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}` // Fixed template literal
                 },
                 body: JSON.stringify({
                     currentPassword,
                     newPassword
                 })
-            });
+            })
 
             if (response.ok) {
-                alert('Password updated successfully!');
-                toggleEdit('password');
+                alert('Password updated successfully!')
+                toggleEdit('password')
             } else {
-                const errorData = await response.json();
-                alert(errorData.message || 'Failed to update password');
+                const errorData = await response.json()
+                alert(errorData.message || 'Failed to update password')
             }
         } catch (error) {
-            console.error('Error updating password:', error);
-            alert('Network error. Please try again.');
+            console.error('Error updating password:', error)
+            alert('Network error. Please try again.')
         }
-    };
+    }
 
     // Toggle password visibility
     const togglePasswordVisibility = (field) => {
         setPasswordVisibility(prev => ({
             ...prev,
             [field]: !prev[field]
-        }));
+        }))
     }
 
     // Handle image upload
     const handleImageUpload = (e) => {
-        const file = e.target.files[0];
+        const file = e.target.files[0]
         if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setProfileImage(e.target.result);
+            const reader = new FileReader()
+            reader.onload = (event) => { // Changed parameter name to avoid conflict
+                setProfileImage(event.target.result)
                 // Here you would typically upload the image to your server
-            };
-            reader.readAsDataURL(file);
+            }
+            reader.readAsDataURL(file)
         }
     }
 
@@ -178,8 +186,16 @@ const ProfileSettings = () => {
 
     return (
         <div className="containers">
+            {/* Back Button */}
+            <button className="back-button" onClick={handleBackClick}>
+                <svg className="back-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                <span>Back</span>
+            </button>
+
             {/* Header */}
-            <div className="headers">
+            <div className="mainheaders">
                 <h1>Profile Settings</h1>
                 <p>Manage your account settings and preferences</p>
             </div>
@@ -371,7 +387,7 @@ const ProfileSettings = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
 export default ProfileSettings
