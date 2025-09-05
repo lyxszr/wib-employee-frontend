@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import Header from "../../components/Header/Header"
 import "./Calendar.css"
@@ -8,15 +8,63 @@ const months = [
   "July", "August", "September", "October", "November", "December"
 ]
 
+const API_BASE_URL = 'http://localhost:5000/api'
+
+const getMonthlyAttendance = async (year, month) => {
+  try {
+    const email = "jjjavien277@gmail.com"
+
+    const response = await fetch(
+      `${API_BASE_URL}/employee/v1/monthly-record?year=${year}&month=${month}&email=${encodeURIComponent(email)}`, 
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    return data
+
+  } catch (error) {
+    console.error('Error fetching monthly attendance:', error)
+    throw error
+  }
+}
+
 const Calendar = () => {
   const today = new Date()
   const [year, setYear] = useState(today.getFullYear())
-  const [month, setMonth] = useState(today.getMonth()) // use index, not string
+  const [month, setMonth] = useState(today.getMonth())
   const [activeNav, setActiveNav] = useState("CALENDAR")
+  const [attendanceData, setAttendanceData] = useState({})
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  // store approval state for each day in an object: { "2025-09-01": true/false }
-  const [approvals, setApprovals] = useState({})
+  // Fetch attendance data when month/year changes
+  useEffect(() => {
+    fetchAttendanceData()
+  }, [year, month])
+
+  const fetchAttendanceData = async () => {
+    setLoading(true)
+    try {
+      const response = await getMonthlyAttendance(year, month)
+      if (response.success) {
+        setAttendanceData(response.data)
+      }
+    } catch (error) {
+      console.error('Error fetching attendance data:', error)
+      // Handle error (show toast, etc.)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleNavClick = (nav) => {
     setActiveNav(nav)
@@ -24,12 +72,11 @@ const Calendar = () => {
       navigate("/dashboard")
     } else if (nav === "REQUEST LEAVE") {
       navigate("/request-leave")
-    } else if (nav === "LOGOUT") {
-      navigate("/authentication")
+    } else if (nav === "CALENDAR") {
+      navigate("/calendar")
     }
   }
 
-  // build days for current month (with prev/next fillers)
   const generateCalendarDays = () => {
     const firstDay = new Date(year, month, 1).getDay()
     const daysInMonth = new Date(year, month + 1, 0).getDate()
@@ -57,17 +104,53 @@ const Calendar = () => {
     return days
   }
 
-  const toggleApproval = (dayKey) => {
-    setApprovals((prev) => ({
-      ...prev,
-      [dayKey]: !prev[dayKey]
-    }))
+  const formatTime = (dateString) => {
+    if (!dateString) return '--:--'
+    const date = new Date(dateString)
+    return date.toLocaleTimeString('en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      hour12: false 
+    })
+  }
+
+  const formatHours = (hours) => {
+    if (!hours) return '0.00'
+    return hours.toFixed(2)
+  }
+
+  const formatDuration = (hours) => {
+    if (!hours || hours === 0) return '0h 0m'
+    
+    const wholeHours = Math.floor(hours)
+    const minutes = Math.round((hours - wholeHours) * 60)
+    
+    if (wholeHours > 0 && minutes > 0) {
+      return `${wholeHours}h ${minutes}m`
+    } else if (wholeHours > 0) {
+      return `${wholeHours}h`
+    } else {
+      return `${minutes}m`
+    }
+  }
+
+  const getStatusDisplay = (status) => {
+    switch (status) {
+      case 'completed':
+        return 'APPROVED'
+      case 'working':
+        return 'WORKING'
+      case 'on_break':
+        return 'ON BREAK'
+      default:
+        return 'PENDING'
+    }
   }
 
   const days = generateCalendarDays()
 
   return (
-    <div className="calendar">
+    <div className="dashboard">
       <Header
         activeNav={activeNav}
         handleNavClick={handleNavClick}
@@ -81,59 +164,149 @@ const Calendar = () => {
       />
 
       <main className="content">
+        <h1 className="page-title">Employee Attendance Calendar</h1>
+        
         <div className="calendar-container">
           <div className="calendar-header">
-            <h2 className="calendar-title">
-              {months[month]} {year}
-            </h2>
+            <div className="navigation-controls">
+              <button 
+                className="nav-arrow"
+                onClick={() => {
+                  if (month === 0) {
+                    setMonth(11)
+                    setYear(year - 1)
+                  } else {
+                    setMonth(month - 1)
+                  }
+                }}
+                aria-label="Previous month"
+              >
+                ←
+              </button>
+              
+              <h2 className="calendar-title">
+                {months[month]} {year}
+              </h2>
+              
+              <button 
+                className="nav-arrow"
+                onClick={() => {
+                  if (month === 11) {
+                    setMonth(0)
+                    setYear(year + 1)
+                  } else {
+                    setMonth(month + 1)
+                  }
+                }}
+                aria-label="Next month"
+              >
+                →
+              </button>
+            </div>
+
+            <div className="calendar-actions">
+              <button className="action-btn">
+                <span className="btn-icon">📊</span>
+                Export
+              </button>
+              <button className="action-btn">
+                <span className="btn-icon">🖨️</span>
+                Print
+              </button>
+            </div>
           </div>
 
           <div className="calendar-grid">
-            {["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"].map((d) => (
-              <div key={d} className="day-header">
-                {d}
+            {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map((day, index) => (
+              <div key={day} className="day-header">
+                <span className="day-full">{day}</span>
+                <span className="day-short">
+                  {["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"][index]}
+                </span>
               </div>
             ))}
 
             {days.map((dayObj, idx) => {
-  const dayKey = `${year}-${month + 1}-${dayObj.day}`
-  const isApproved = approvals[dayKey] || false // optional, can default to false
+              const dayKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(dayObj.day).padStart(2, '0')}`
+              const attendance = attendanceData[dayKey]
+              const hasAttendance = attendance && (attendance.timeIn || attendance.timeOut)
 
-  return (
-    <div
-      key={idx}
-      className={`day-cell ${dayObj.isOtherMonth ? "other-month" : ""} ${
-        dayObj.isToday ? "today" : ""
-      }`}
-    >
-      <div className="day-number">{dayObj.day}</div>
+              return (
+                <div
+                  key={idx}
+                  className={`day-cell ${dayObj.isOtherMonth ? "other-month" : ""} ${
+                    dayObj.isToday ? "today" : ""
+                  } ${hasAttendance ? "has-data" : ""}`}
+                >
+                  <div className="day-number">{dayObj.day}</div>
 
-      {!dayObj.isOtherMonth && (
-        <>
-          <div className="time-section">
-            <div className="time-input-group">
-              <span className="time-label">IN</span>
-              <input type="time" className="time-input" />
-            </div>
-            <div className="time-input-group">
-              <span className="time-label">OUT</span>
-              <input type="time" className="time-input" />
-            </div>
-          </div>
-          <div className="approval-section">
-            <div
-              className={`approval-status ${isApproved ? "approved" : "pending"}`}
-            >
-              {isApproved ? "APPROVED" : "PENDING"}
-            </div>
-          </div>
-                  </>
-              )}
-              </div>
-             )
+                  {!dayObj.isOtherMonth && (
+                    <div className="attendance-content">
+                      {hasAttendance ? (
+                        <>
+                          <div className="time-section">
+                            <div className="time-row">
+                              <div className="time-group">
+                                <span className="time-label">Check In</span>
+                                <div className="time-value">
+                                  {formatTime(attendance?.timeIn)}
+                                </div>
+                              </div>
+                              <div className="time-group">
+                                <span className="time-label">Check Out</span>
+                                <div className="time-value">
+                                  {formatTime(attendance?.timeOut)}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="hours-section">
+                            <div className="hours-item">
+                              <span className="hours-label">Break</span>
+                              <span className="hours-value break">
+                                {formatDuration(attendance?.breakTime)}
+                              </span>
+                            </div>
+                            <div className="hours-item">
+                              <span className="hours-label">Total</span>
+                              <span className="hours-value total">
+                                {formatDuration(attendance?.totalHours)}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="status-section">
+                            <span
+                              className={`status-badge ${
+                                attendance?.status === 'completed' ? "pending" : 
+                                attendance?.status === 'working' ? "working" :
+                                attendance?.status === 'on_break' ? "on-break" : "pending"
+                              }`}
+                            >
+                              {getStatusDisplay(attendance?.status)}
+                            </span>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="no-data">
+                          <span className="no-data-text">No attendance</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )
             })}
           </div>
         </div>
+        
+        {loading && (
+          <div className="loading-overlay">
+            <div className="loading-spinner"></div>
+            <span className="loading-text">Loading attendance data...</span>
+          </div>
+        )}
       </main>
     </div>
   )
