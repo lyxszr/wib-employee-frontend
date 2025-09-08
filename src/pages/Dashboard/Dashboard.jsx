@@ -9,7 +9,6 @@ const Dashboard = () => {
   const [activeMonthBtn, setActiveMonthBtn] = useState("Current Month")
   const [activeNav, setActiveNav] = useState("DASHBOARD") // Changed from "CALENDAR" to "DASHBOARD"
   const navigate = useNavigate()
-
   
   const handleMonthBtnClick = (btn) => setActiveMonthBtn(btn)
   const handleNavClick = (nav) => {

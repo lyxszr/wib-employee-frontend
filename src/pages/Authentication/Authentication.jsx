@@ -1,33 +1,18 @@
 import { useNavigate } from "react-router-dom"
-import React, { useState } from "react"
+import { useSignIn } from "../../hooks/authentication/useAuthMutations"
+import { useState } from "react"
 import "./Authentication.css"
 
 const Authentication = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [signInError, setSignInError] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+
+  const signInMutation = useSignIn()
 
   const handleSignIn = async (e) => {
     e.preventDefault()
-    setIsLoading(true)
-    setSignInError("")
-    try {
-      const res = await fetch("http://localhost:5000/api/auth/v1/sign-in", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      })
-      if (res.status === 200) {
-        navigate("/dashboard")
-      }
-      // Optionally handle successful sign in (e.g., save token, redirect)
-    } catch (err) {
-      setSignInError(err.message)
-    } finally {
-      setIsLoading(false)
-    }
+    signInMutation.mutate({ email, password })
   }
 
   return (
@@ -69,10 +54,18 @@ const Authentication = () => {
             />
           </div>
 
-          <button type="submit" className="btn-login" disabled={isLoading}>
-            {isLoading ? "Signing In..." : "Login"}
+          <button 
+            type="submit" 
+            className="btn-login" 
+            disabled={signInMutation.isPending} // ← Changed from isLoading
+          >
+            {signInMutation.isPending ? "Signing In..." : "Login"} {/* ← Changed from isLoading */}
           </button>
-          {signInError && <div style={{ color: "red", marginTop: 8 }}>{signInError}</div>}
+          {signInMutation.error && ( // ← Changed from signInError
+            <div style={{ color: "red", marginTop: 8 }}>
+              {signInMutation.error.message} {/* ← Added .message */}
+            </div>
+          )}
         </form>
       </div>
     </div>

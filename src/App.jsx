@@ -1,10 +1,11 @@
+// App.jsx
 import { lazy, Suspense } from "react"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
+import { UserProfileProvider } from "./context/UserProfileContext"
 import './App.css'
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { useApiClientSetup } from './hooks/shared/useApiClient'
 import ProfileSettings from "./pages/Profile/Profile"
-
-const queryClient = new QueryClient()
 
 const Authentication = lazy(() => import('./pages/Authentication/Authentication'))
 const AttendanceRecord = lazy(() => import('./pages/AttendanceRecord/AttendanceRecord'))
@@ -13,11 +14,13 @@ const Calendar = lazy(() => import('./pages/Calendar/Calendar'))
 const RequestLeave = lazy(() => import('./pages/RequestLeave/RequestLeave'))  
 const Profile = lazy(() => import('./pages/Profile/Profile'))
 
-function App() {
+const AppContent = () => {
+  useApiClientSetup() 
+  
   return (
-    <Router>
-      <Suspense fallback={<div>Loading...</div>}>
-        <QueryClientProvider client={queryClient}>
+    <AuthProvider>
+      <UserProfileProvider>
+        <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/authentication" element={<Authentication />}/>
             <Route path="/attendance-record" element={<AttendanceRecord />}/>
@@ -27,8 +30,16 @@ function App() {
             <Route path="/profile-settings" element={<ProfileSettings />}/>
             <Route path="/profile" element={<Profile />}/>
           </Routes>
-        </QueryClientProvider>
-      </Suspense>
+        </Suspense>
+      </UserProfileProvider>
+    </AuthProvider>
+  )
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   )
 }
