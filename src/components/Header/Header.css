@@ -45,16 +45,13 @@
     font-size: 18px;
     flex-shrink: 0;
 }
-
-.logo::before {
-    content: "🏔️";
-    margin-right: 8px;
-    font-size: 24px;
-}
-
+/* Base Logo Styles */
 .logo-img {
     height: 40px;
     object-fit: contain;
+    width: auto;
+    max-width: 100%;
+    transition: height 0.3s ease;
 }
 
 .navigation {
@@ -199,10 +196,9 @@
     .logo {
         font-size: 16px;
     }
-    
-    .logo::before {
-        font-size: 20px;
-        margin-right: 6px;
+
+     .logo-img {
+        height: 36px;
     }
     
     .navigation {
@@ -273,10 +269,6 @@
         margin-left: 10px;
     }
     
-    .logo::before {
-        font-size: 18px;
-        margin-right: 5px;
-    }
     
     .navigation {
         padding: 8px 15px;
@@ -359,10 +351,6 @@
         margin-left: 8px;
     }
     
-    .logo::before {
-        font-size: 16px;
-        margin-right: 4px;
-    }
     
     .navigation {
         padding: 6px 12px;
@@ -430,12 +418,7 @@
         font-size: 10px;
         margin-left: 5px;
     }
-    
-    .logo::before {
-        font-size: 14px;
-        margin-right: 3px;
-    }
-    
+
     .navigation {
         padding: 5px 8px;
         gap: 6px;
