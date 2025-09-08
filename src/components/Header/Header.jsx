@@ -34,11 +34,7 @@ const Header = ({
     setIsProfileSidebarOpen(false)
   };
 
-  // Handle logout from main navigation
-  const handleLogout = () => {
-    localStorage.removeItem('authToken')
-    navigate('/authentication')
-  };
+ 
 
   return (
     <>
@@ -100,14 +96,7 @@ const Header = ({
           >
             REQUEST LEAVE
           </button>
-          <button
-            type="button"
-            className="nav-link"
-            onClick={handleLogout}
-            style={{ background: "none", border: "none", padding: 0, margin: 0, cursor: "pointer" }}
-          >
-            LOGOUT
-          </button>
+      
         </div>
 
         {typeof year === "number" && typeof safeMonth === "string" && setYear && setMonth && (
