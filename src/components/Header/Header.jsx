@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ProfileSidebar from "../Sidebar/Sidebar"
+import useUserProfile from "../../hooks/user/useUserProfile"
 import "./Header.css"
 
 // This Header component expects year (number), month (string), setYear, setMonth, months as props from parent
@@ -17,7 +18,7 @@ const Header = ({
   ]
 }) => {
   const navigate = useNavigate()
-  const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false);
+  const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false)
 
   // Defensive: ensure month is a string and in months array
   const safeMonth = typeof month === "string" && months.includes(month)
@@ -32,9 +33,19 @@ const Header = ({
   // Close profile sidebar
   const closeProfileSidebar = () => {
     setIsProfileSidebarOpen(false)
-  };
+  }
 
+<<<<<<< HEAD
  
+=======
+  // Handle logout from main navigation
+  const handleLogout = () => {
+    localStorage.removeItem('authToken')
+    navigate('/authentication')
+  }
+
+  const { userProfile } = useUserProfile()
+>>>>>>> 2b9d56adf8448b79fa01e0a186a9418cf7d32d6d
 
   return (
     <>
@@ -59,7 +70,7 @@ const Header = ({
             </div>
           </div>
           <div className="welcome-text">
-            Welcome, <span id="userName">Juan Dela Cruz</span>!
+            Welcome, <span id="userName">{userProfile?.name}</span>!
           </div>
         </div>
         

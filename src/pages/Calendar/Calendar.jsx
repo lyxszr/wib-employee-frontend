@@ -1,66 +1,30 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useGetMonthlyAttendance } from "../../hooks/employees/useEmployeesServices"
 import Header from "../../components/Header/Header"
 import "./Calendar.css"
+import useUserProfile from "../../hooks/user/useUserProfile"
 
 const months = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ]
 
-const API_BASE_URL = 'http://localhost:5000/api'
-
-const getMonthlyAttendance = async (year, month) => {
-  try {
-    const email = "jjjavien277@gmail.com"
-
-    const response = await fetch(
-      `${API_BASE_URL}/employee/v1/monthly-record?year=${year}&month=${month}&email=${encodeURIComponent(email)}`, 
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    )
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-
-    const data = await response.json()
-    return data
-
-  } catch (error) {
-    console.error('Error fetching monthly attendance:', error)
-    throw error
-  }
-}
-
 const Calendar = () => {
+  const navigate = useNavigate()
   const today = new Date()
+  
   const [year, setYear] = useState(today.getFullYear())
   const [month, setMonth] = useState(today.getMonth())
   const [activeNav, setActiveNav] = useState("CALENDAR")
-  const [attendanceData, setAttendanceData] = useState({})
-  const navigate = useNavigate()
+  const { userProfile } = useUserProfile()
 
-  // Fetch attendance data when month/year changes
-  useEffect(() => {
-    fetchAttendanceData()
-  }, [year, month])
-
-  const fetchAttendanceData = async () => {
-    try {
-      const response = await getMonthlyAttendance(year, month)
-      if (response.success) {
-        setAttendanceData(response.data)
-      }
-    } catch (error) {
-      console.error('Error fetching attendance data:', error)
-      // Handle error (show toast, etc.)
-    }
-  }
+  const { 
+    data: userAttendanceData, 
+    isLoading, 
+    error, 
+    refetch 
+  } = useGetMonthlyAttendance(year, month, userProfile?.email)
 
   const handleNavClick = (nav) => {
     setActiveNav(nav)
@@ -70,6 +34,24 @@ const Calendar = () => {
       navigate("/request-leave")
     } else if (nav === "CALENDAR") {
       navigate("/calendar")
+    }
+  }
+
+  const handlePreviousMonth = () => {
+    if (month === 0) {
+      setMonth(11)
+      setYear(year - 1)
+    } else {
+      setMonth(month - 1)
+    }
+  }
+
+  const handleNextMonth = () => {
+    if (month === 11) {
+      setMonth(0)
+      setYear(year + 1)
+    } else {
+      setMonth(month + 1)
     }
   }
 
@@ -108,11 +90,6 @@ const Calendar = () => {
       minute: '2-digit', 
       hour12: false 
     })
-  }
-
-  const formatHours = (hours) => {
-    if (!hours) return '0.00'
-    return hours.toFixed(2)
   }
 
   const formatDuration = (hours) => {
@@ -167,14 +144,8 @@ const Calendar = () => {
             <div className="navigation-controls">
               <button 
                 className="nav-arrow"
-                onClick={() => {
-                  if (month === 0) {
-                    setMonth(11)
-                    setYear(year - 1)
-                  } else {
-                    setMonth(month - 1)
-                  }
-                }}
+                onClick={handlePreviousMonth}
+                disabled={isLoading}
                 aria-label="Previous month"
               >
                 ←
@@ -182,18 +153,15 @@ const Calendar = () => {
               
               <h2 className="calendar-title">
                 {months[month]} {year}
+                {isLoading && (
+                  <span className="loading-indicator"> (Loading...)</span>
+                )}
               </h2>
               
               <button 
                 className="nav-arrow"
-                onClick={() => {
-                  if (month === 11) {
-                    setMonth(0)
-                    setYear(year + 1)
-                  } else {
-                    setMonth(month + 1)
-                  }
-                }}
+                onClick={handleNextMonth}
+                disabled={isLoading}
                 aria-label="Next month"
               >
                 →
@@ -201,16 +169,43 @@ const Calendar = () => {
             </div>
 
             <div className="calendar-actions">
-              <button className="action-btn">
+              <button 
+                className="action-btn"
+                disabled={isLoading}
+              >
                 <span className="btn-icon">📤</span>
                 Export
               </button>
-              <button className="action-btn">
+              <button 
+                className="action-btn"
+                disabled={isLoading}
+              >
                 <span className="btn-icon">🖨️</span>
                 Print
               </button>
+              <button 
+                className="action-btn"
+                onClick={() => refetch()}
+                disabled={isLoading}
+              >
+                <span className="btn-icon">🔄</span>
+                {isLoading ? "Loading..." : "Refresh"}
+              </button>
             </div>
           </div>
+
+          {/* Error handling */}
+          {error && (
+            <div style={{ color: "red", marginBottom: 16, padding: "8px 0" }}>
+              Error loading attendance: {error.message}
+              <button 
+                onClick={() => refetch()}
+                style={{ marginLeft: 8, color: "blue", background: "none", border: "none", cursor: "pointer" }}
+              >
+                Retry
+              </button>
+            </div>
+          )}
 
           <div className="calendar-grid">
             {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map((day, index) => (
@@ -224,7 +219,7 @@ const Calendar = () => {
 
             {days.map((dayObj, idx) => {
               const dayKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(dayObj.day).padStart(2, '0')}`
-              const attendance = attendanceData[dayKey]
+              const attendance = userAttendanceData?.success ? userAttendanceData.data?.[dayKey] : null
               const hasAttendance = attendance && (attendance.timeIn || attendance.timeOut)
 
               return (
@@ -232,7 +227,9 @@ const Calendar = () => {
                   key={idx}
                   className={`day-cell ${dayObj.isOtherMonth ? "other-month" : ""} ${
                     dayObj.isToday ? "today" : ""
-                  } ${hasAttendance ? "has-data" : ""}`}
+                  } ${hasAttendance ? "has-data" : ""} ${
+                    isLoading ? "loading" : ""
+                  }`}
                 >
                   <div className="day-number">{dayObj.day}</div>
 
@@ -286,7 +283,9 @@ const Calendar = () => {
                         </>
                       ) : (
                         <div className="no-data">
-                          <span className="no-data-text">No attendance</span>
+                          <span className="no-data-text">
+                            {isLoading ? "Loading..." : "No attendance"}
+                          </span>
                         </div>
                       )}
                     </div>
