@@ -266,6 +266,7 @@
 .holiday-table th,
 .holiday-table td {
     white-space: nowrap;
+    font-size: .8rem;
 }
 
 .leave-credits .leave-section,
@@ -474,7 +475,7 @@
     .holiday-table {
         min-width: 500px;
     }
-    
+
     .attendance-table th,
     .attendance-table td,
     .leave-table th,
