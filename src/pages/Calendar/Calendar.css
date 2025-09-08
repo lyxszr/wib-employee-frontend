@@ -6,20 +6,6 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
-.header {
-    background: #445c2b;
-    color: white;
-    padding: 15px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-}
 
 .profile-icon {
     width: 40px;
@@ -50,6 +36,8 @@
     font-size: 24px;
 }
 
+=======
+>>>>>>> fa2b500825a3c90973e72db4031709c31339913a
 .navigation {
     background: white;
     border-bottom: 2px solid #e9ecef;
