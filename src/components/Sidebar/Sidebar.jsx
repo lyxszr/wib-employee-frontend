@@ -69,7 +69,7 @@ const ProfileSidebar = ({ isOpen, onClose }) => {
       <div className={`profile-sidebar ${isOpen ? 'open' : ''}`}>
         {/* Header with close button */}
         <div className="profile-sidebar-headers">
-          <h2 className="sidebar-title">Profile</h2>
+        
           <button 
             className="close-button" 
             onClick={onClose}
