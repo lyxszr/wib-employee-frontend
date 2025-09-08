@@ -119,7 +119,7 @@ const RequestLeave = () => {
                 <input
                   type="date"
                   name="startDate"
-                  className={`date-input ${errors.startDate ? "error" : ""}`}
+                  className={`date-inputs ${errors.startDate ? "error" : ""}`}
                   value={formData.startDate}
                   onChange={handleChange}
                   required
@@ -130,11 +130,11 @@ const RequestLeave = () => {
                 <input
                   type="date"
                   name="endDate"
-                  className={`date-input ${errors.endDate ? "error" : ""}`}
+                  className={`date-inputs ${errors.endDate ? "error" : ""}`}
                   value={formData.endDate}
                   onChange={handleChange}
                   required
-                />
+                /> 
               </div>
             </div>
 

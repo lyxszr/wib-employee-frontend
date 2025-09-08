@@ -43,7 +43,6 @@ const Calendar = () => {
   const [month, setMonth] = useState(today.getMonth())
   const [activeNav, setActiveNav] = useState("CALENDAR")
   const [attendanceData, setAttendanceData] = useState({})
-  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   // Fetch attendance data when month/year changes
@@ -52,7 +51,6 @@ const Calendar = () => {
   }, [year, month])
 
   const fetchAttendanceData = async () => {
-    setLoading(true)
     try {
       const response = await getMonthlyAttendance(year, month)
       if (response.success) {
@@ -61,8 +59,6 @@ const Calendar = () => {
     } catch (error) {
       console.error('Error fetching attendance data:', error)
       // Handle error (show toast, etc.)
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -206,7 +202,7 @@ const Calendar = () => {
 
             <div className="calendar-actions">
               <button className="action-btn">
-                <span className="btn-icon">📊</span>
+                <span className="btn-icon">📤</span>
                 Export
               </button>
               <button className="action-btn">
@@ -300,13 +296,6 @@ const Calendar = () => {
             })}
           </div>
         </div>
-        
-        {loading && (
-          <div className="loading-overlay">
-            <div className="loading-spinner"></div>
-            <span className="loading-text">Loading attendance data...</span>
-          </div>
-        )}
       </main>
     </div>
   )
