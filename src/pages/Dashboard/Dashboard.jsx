@@ -143,10 +143,10 @@ const Dashboard = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>SL (Sick Leave)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>SL</td>
+                  <td>SL (Sick Leave)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
                 </tr>
                 <tr style={{ background: "#f8f9fa" }}>
-                  <td>VL (Vacation Leave)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>ML_104_BIRTH</td>
+                  <td>VL (Vacation Leave)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
                 </tr>
               </tbody>
             </table>
