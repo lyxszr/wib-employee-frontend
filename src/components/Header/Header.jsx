@@ -66,7 +66,7 @@ const Header = ({
             </div>
           </div>
           <div className="welcome-text">
-            Welcome, <span id="userName">{userProfile?.name}</span>!
+            Welcome, <span id="userName">{userProfile?.name}</span>
           </div>
         </div>
         
