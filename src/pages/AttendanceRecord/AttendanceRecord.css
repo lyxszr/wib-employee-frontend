@@ -86,6 +86,16 @@
   margin-bottom: 30px;
 }
 
+.status-message {
+  background-color: #f5f5f5;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
 .signup-form {
   width: 80%;
   text-align: center;
@@ -153,6 +163,33 @@
   background-color: #29B6F6;
 }
 
+.btn-time-in:disabled {
+  background-color: #B0BEC5;
+  cursor: not-allowed;
+}
+
+.btn-break {
+  width: 80%;
+  padding: 15px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-break:hover {
+  background-color: #45a049;
+}
+
+.btn-break:disabled {
+  background-color: #B0BEC5;
+  cursor: not-allowed;
+}
+
 .btn-time-out {
   width: 80%;
   padding: 15px;
@@ -168,6 +205,21 @@
 
 .btn-time-out:hover {
   background-color: #D32F2F;
+}
+
+.btn-time-out:disabled {
+  background-color: #B0BEC5;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.success-message {
+  color: green;
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -245,7 +297,9 @@
     font-size: 15px;
   }
   
-  .btn-time-in, .btn-time-out {
+  .btn-time-in, 
+  .btn-break,
+  .btn-time-out {
     width: 100%;
     padding: 12px;
     font-size: 15px;
@@ -286,7 +340,9 @@
     height: 16px;
   }
   
-  .btn-time-in, .btn-time-out {
+  .btn-time-in,
+  .btn-break,
+  .btn-time-out {
     padding: 10px;
     font-size: 14px;
   }
@@ -324,3 +380,4 @@
     font-size: 13px;
   }
 }
+
