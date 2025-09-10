@@ -79,7 +79,7 @@
     border-bottom: 3px solid transparent;
     transition: all 0.3s ease;
     white-space: nowrap;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .nav-link.active {
@@ -174,6 +174,10 @@
     .nav-links {
         gap: 25px;
     }
+
+    .nav-link {
+        font-size: 15px;
+    }
 }
 
 /* Tablet (768px - 1023px) */
@@ -212,7 +216,7 @@
     
     .nav-link {
         padding: 6px 12px;
-        font-size: 14px;
+        font-size: 16px;
     }
     
     .date-controls {
@@ -287,7 +291,7 @@
     
     .nav-link {
         padding: 6px 10px;
-        font-size: 12px;
+        font-size: 14px;
         text-align: center;
         flex: 1 1 auto;
         min-width: 70px;
