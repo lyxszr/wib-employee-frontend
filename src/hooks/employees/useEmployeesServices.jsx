@@ -27,3 +27,43 @@ export const useSubmitLeaveRequest = () => {
   )
 }
 
+export const useGetEmployeeStatus = (email) => {
+  return useApiQuery(
+    ['employeeStatus', email],
+    `api/employee/v1/get-employee-status?email=${email}`,
+    {
+      enabled: !!email,
+      staleTime: 30 * 1000, // 30 seconds
+      cacheTime: 60 * 1000, // 1 minute
+      refetchInterval: 30 * 1000, // Refetch every 30 seconds to keep status updated
+    }
+  )
+}
+
+export const useTimeInAction = () => {
+  return useApiMutation(
+    'post',
+    ({ email, password, skipBreak }) => ({
+      endpoint: 'api/employee/v1/time-in',
+      data: { email, password, skipBreak }
+    }),
+    {
+      onSuccess: (data) => console.log('Time action completed:', data),
+      onError: (error) => console.error('Time action error:', error)
+    }
+  )
+}
+
+export const useTimeOutAction = () => {
+  return useApiMutation(
+    'post',
+    ({ email, password }) => ({
+      endpoint: 'api/employee/v1/time-out',
+      data: { email, password }
+    }),
+    {
+      onSuccess: (data) => console.log('Time out completed:', data),
+      onError: (error) => console.error('Time out error:', error)
+    }
+  )
+}

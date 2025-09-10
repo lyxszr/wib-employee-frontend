@@ -25,12 +25,12 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <Header
-       activeNav={activeNav}
-  handleNavClick={handleNavClick}
-  year={year}
-  month={month}
-  setYear={setYear}
-  setMonth={setMonth}
+        activeNav={activeNav}
+        handleNavClick={handleNavClick}
+        year={year}
+        month={month}
+        setYear={setYear}
+        setMonth={setMonth}
     />
 
     <main className="content">

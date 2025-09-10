@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "./AttendanceRecord.css"
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
+import { 
+  useGetEmployeeStatus, 
+  useTimeInAction, 
+  useTimeOutAction 
+} from '../../hooks/employees/useEmployeesServices'
 
 const AttendanceRecord = () => {
   const [time, setTime] = useState("")
   const [date, setDate] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [currentState, setCurrentState] = useState("TIME_IN") // TIME_IN, BREAK, BACK_FROM_BREAK, TIME_OUT
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
+
+  // Fetch employee status
+  const { data: employeeStatus, isLoading: statusLoading, error: statusError } = useGetEmployeeStatus(email)
+  
+  // Mutations
+  const timeInMutation = useTimeInAction()
+  const timeOutMutation = useTimeOutAction()
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -39,165 +51,137 @@ const AttendanceRecord = () => {
     return () => clearInterval(interval)
   }, [])
 
-  // Mutation for Time In
-  const timeInMutation = useMutation({
-    mutationFn: async ({ email, password }) => {
-      const res = await fetch('http://localhost:5000/api/employee/v1/time-in', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      })
-      if (!res.ok) throw new Error('Failed to time in')
-      return res.json()
-    },
-  })
-
-  // Mutation for Break
-  const breakMutation = useMutation({
-    mutationFn: async ({ email, password }) => {
-      const res = await fetch('http://localhost:5000/api/employee/v1/break', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      })
-      if (!res.ok) throw new Error('Failed to start break')
-      return res.json()
-    },
-  })
-
-  // Mutation for Back from Break (second time in)
-  const backFromBreakMutation = useMutation({
-    mutationFn: async ({ email, password }) => {
-      const res = await fetch('http://localhost:5000/api/employee/v1/back-from-break', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      })
-      if (!res.ok) throw new Error('Failed to return from break')
-      return res.json()
-    },
-  })
-
-  // Mutation for Time Out
-  const timeOutMutation = useMutation({
-    mutationFn: async ({ email, password }) => {
-      const res = await fetch('http://localhost:5000/api/employee/v1/time-out', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      })
-      if (!res.ok) throw new Error('Failed to time out')
-      return res.json()
-    },
-  })
-
-  const handleTimeIn = () => {
-    const now = new Date()
-    if (currentState === "TIME_IN") {
-      // First time in
-      setCurrentState("BREAK")
-      timeInMutation.mutate({ email, password })
-      console.log("First Time In at:", now.toLocaleTimeString())
-    } else if (currentState === "BACK_FROM_BREAK") {
-      // Second time in (back from break)
-      setCurrentState("TIME_OUT")
-      backFromBreakMutation.mutate({ email, password })
-      console.log("Back from Break at:", now.toLocaleTimeString())
-    }
+  // Refetch status after successful mutations
+  const invalidateStatus = () => {
+    queryClient.invalidateQueries(['employeeStatus', email])
   }
 
-  const handleBreak = () => {
-    const now = new Date()
-    setCurrentState("BACK_FROM_BREAK")
-    breakMutation.mutate({ email, password })
-    console.log("Break started at:", now.toLocaleTimeString())
+  const handleTimeInAction = (skipBreak = false) => {
+    timeInMutation.mutate(
+      { email, password, skipBreak },
+      {
+        onSuccess: () => {
+          invalidateStatus()
+          console.log("Time in action completed at:", new Date().toLocaleTimeString())
+        }
+      }
+    )
   }
 
   const handleTimeOut = () => {
-    const now = new Date()
-    timeOutMutation.mutate({ email, password })
-    console.log("Time Out at:", now.toLocaleTimeString())
-    
-    // Reset to initial state
-    setCurrentState("TIME_IN")
+    timeOutMutation.mutate(
+      { email, password },
+      {
+        onSuccess: () => {
+          invalidateStatus()
+          console.log("Time out completed at:", new Date().toLocaleTimeString())
+        }
+      }
+    )
   }
 
-  const getButtonText = () => {
-    switch (currentState) {
-      case "TIME_IN":
-        return "Time In"
-      case "BREAK":
-        return "Break"
-      case "BACK_FROM_BREAK":
-        return "Time In"
-      case "TIME_OUT":
-        return "Time Out"
+  const handleButtonClick = () => {
+    if (!employeeStatus) return
+
+    switch (employeeStatus.action) {
+      case 'time_in':
+      case 'back_from_break':
+        handleTimeInAction()
+        break
+      case 'go_on_break':
+        handleTimeInAction() // This will start break
+        break
+      case 'time_out':
+        handleTimeOut()
+        break
+      case 'skip_break_time_out':
+        handleTimeInAction(true) // Skip break and time out
+        break
       default:
-        return "Time In"
+        break
     }
   }
 
+  const getButtonText = () => {
+    if (!employeeStatus) return "Loading..."
+    return employeeStatus.buttonText || "Time In"
+  }
+
   const getButtonClass = () => {
-    switch (currentState) {
-      case "TIME_IN":
-      case "BACK_FROM_BREAK":
+    if (!employeeStatus) return "btn-time-in"
+    
+    switch (employeeStatus.action) {
+      case 'time_in':
+      case 'back_from_break':
         return "btn-time-in"
-      case "BREAK":
+      case 'go_on_break':
         return "btn-break"
-      case "TIME_OUT":
+      case 'time_out':
         return "btn-time-out"
       default:
         return "btn-time-in"
     }
   }
 
-  const handleButtonClick = () => {
-    switch (currentState) {
-      case "TIME_IN":
-        handleTimeIn()
-        break
-      case "BREAK":
-        handleBreak()
-        break
-      case "BACK_FROM_BREAK":
-        handleTimeIn()
-        break
-      case "TIME_OUT":
-        handleTimeOut()
-        break
-      default:
-        break
-    }
-  }
-
   const getStatusMessage = () => {
-    switch (currentState) {
-      case "TIME_IN":
+    if (statusLoading) return "Loading status..."
+    if (statusError) return "Error loading status"
+    if (!employeeStatus) return "Enter credentials to check status"
+
+    switch (employeeStatus.status) {
+      case 'not_clocked_in':
         return "Ready to start your work day"
-      case "BREAK":
-        return "Work session started - you can take a break when ready"
-      case "BACK_FROM_BREAK":
+      case 'working':
+        return "Work session active - you can take a break when ready"
+      case 'on_break':
         return "On break - click to return to work"
-      case "TIME_OUT":
-        return "Work session active - you can time out when done"
+      case 'completed':
+        return `Work day completed - Total: ${employeeStatus.totalHours?.toFixed(2) || 0}hrs`
+      case 'not_employee':
+        return "Account not found as employee"
+      case 'logged_out':
+        return "Please enter your credentials"
       default:
         return ""
     }
   }
 
-  const isLoading = timeInMutation.isLoading || breakMutation.isLoading || 
-                   backFromBreakMutation.isLoading || timeOutMutation.isLoading
+  const isLoading = timeInMutation.isPending || timeOutMutation.isPending || statusLoading
 
   const getError = () => {
-    if (timeInMutation.isError) return timeInMutation.error.message
-    if (breakMutation.isError) return breakMutation.error.message
-    if (backFromBreakMutation.isError) return backFromBreakMutation.error.message
-    if (timeOutMutation.isError) return timeOutMutation.error.message
+    if (timeInMutation.isError) return timeInMutation.error?.message || 'Time in failed'
+    if (timeOutMutation.isError) return timeOutMutation.error?.message || 'Time out failed'
+    if (statusError) return 'Failed to load status'
     return null
   }
 
-  const isSuccess = timeInMutation.isSuccess || breakMutation.isSuccess || 
-                   backFromBreakMutation.isSuccess || timeOutMutation.isSuccess
+  const isSuccess = timeInMutation.isSuccess || timeOutMutation.isSuccess
+
+  const isButtonDisabled = () => {
+    return isLoading || 
+           !email || 
+           !password || 
+           !employeeStatus || 
+           employeeStatus.action === 'none'
+  }
+
+  // Show additional info if available
+  const getAdditionalInfo = () => {
+    if (!employeeStatus) return null
+
+    const info = []
+    if (employeeStatus.workStarted) {
+      info.push(`Work started: ${new Date(employeeStatus.workStarted).toLocaleTimeString()}`)
+    }
+    if (employeeStatus.breakTime) {
+      info.push(`Break time: ${employeeStatus.breakTime.toFixed(2)}hrs`)
+    }
+    if (employeeStatus.canSkipBreak) {
+      info.push(`You can skip break and end your day`)
+    }
+
+    return info.length > 0 ? info.join(' | ') : null
+  }
 
   return (
     <div className="container">
@@ -221,6 +205,13 @@ const AttendanceRecord = () => {
         <div className="status-message">
           {getStatusMessage()}
         </div>
+
+        {/* Additional Info */}
+        {getAdditionalInfo() && (
+          <div className="additional-info">
+            {getAdditionalInfo()}
+          </div>
+        )}
 
         <div className="signup-form">
           <div className="form-group">
@@ -248,7 +239,7 @@ const AttendanceRecord = () => {
             <button
               className={getButtonClass()}
               onClick={handleButtonClick}
-              disabled={isLoading}
+              disabled={isButtonDisabled()}
             >
               {isLoading ? "Processing..." : getButtonText()}
             </button>
@@ -257,12 +248,25 @@ const AttendanceRecord = () => {
           {/* Show feedback */}
           {getError() && (
             <div className="error-message">
-              Failed: {getError()}
+              Error: {getError()}
             </div>
           )}
           {isSuccess && (
             <div className="success-message">
               Action completed successfully!
+            </div>
+          )}
+
+          {/* Skip Break Option - only show when user is working and can take break */}
+          {employeeStatus?.status === 'working' && employeeStatus?.canSkipBreak && (
+            <div className="button-group">
+              <button
+                className="btn-skip-break"
+                onClick={() => handleTimeInAction(true)}
+                disabled={isLoading}
+              >
+                Skip Break & End Day
+              </button>
             </div>
           )}
         </div>

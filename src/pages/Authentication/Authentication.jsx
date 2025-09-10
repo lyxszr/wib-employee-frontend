@@ -60,21 +60,21 @@ const Authentication = () => {
     {signInMutation.isPending ? "Signing In..." : "Login"}
   </button>
 
-  {/* Time In button under Login button */}
-  <button 
-    type="button" 
-    onClick={() => navigate("/attendance-record")} 
-    className="time-in-header"
-  >
-    Time In
-  </button>
+    {/* Time In button under Login button */}
+    <button 
+      type="button" 
+      onClick={() => navigate("/attendance-record")} 
+      className="time-in-header"
+    >
+      Time In
+    </button>
 
-  {signInMutation.error && (
-    <div style={{ color: "red", marginTop: 8 }}>
-      {signInMutation.error.message}
-    </div>
-  )}
-</form>
+    {signInMutation.error && (
+      <div style={{ color: "red", marginTop: 8 }}>
+        {signInMutation.error.message}
+      </div>
+    )}
+  </form>
 
         </div>
       </div>
