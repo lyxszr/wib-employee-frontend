@@ -24,6 +24,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   margin-top: 50px;
   margin-left: 200px;
+  margin-bottom: 40px;
 }
 
 .form-title {
@@ -80,6 +81,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-top: 20px;
+  margin-left: 50px;
 }
 
 .form-input, .form-select {
@@ -102,7 +104,7 @@
 }
 
 .form-textarea {
-  width: 90%;
+  width: 80%;
   padding: 18px 20px;
   border: 2px solid #e2e8f0;
   border-radius: 12px;
@@ -114,6 +116,7 @@
   font-family: inherit;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
+  margin-left: 50px;
 }
 
 .form-textarea:focus {
@@ -125,7 +128,7 @@
 
 .date-inputs {
   width: 50%;
-  padding: 16px 20px;
+  padding: 15px 40px;
   font-size: 16px;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   border: 2px solid #e8e8e8;
@@ -139,6 +142,7 @@
   color: #1a1a1a;
   font-weight: 450;
   letter-spacing: -0.01em;
+  margin-left:50px;
 }
 
 .date-inputs:hover {
@@ -300,6 +304,7 @@
     margin-bottom: 12px;
     font-size: 13px;
     margin-top: 15px;
+  
   }
   
   .form-input, .form-select, .form-textarea {
@@ -383,3 +388,4 @@
     transform: none;
   }
 }
+
