@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useGetMonthlyAttendance } from "../../hooks/employees/useEmployeesServices"
 import Header from "../../components/Header/Header"
@@ -10,6 +10,92 @@ const months = [
   "July", "August", "September", "October", "November", "December"
 ]
 
+// Attendance Modal Component
+const AttendanceModal = ({ isOpen, onClose, attendance, hasAttendance, isLoading, formatTime, formatDuration, getStatusDisplay, date }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="attendance-modal-overlay" onClick={onClose}>
+      <div className="attendance-modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="attendance-modal-header">
+          <h3>Attendance Details - {date}</h3>
+          <button className="close-button" onClick={onClose}>
+            ×
+          </button>
+        </div>
+        
+        <div className="attendance-modal-body">
+          {hasAttendance ? (
+            <>
+              <div className="time-section-modal">
+                <div className="time-row-modal">
+                  <div className="time-group-modal">
+                    <span className="time-label-modal">Check In</span>
+                    <div className="time-value-modal">
+                      {formatTime(attendance?.timeIn)}
+                    </div>
+                  </div>
+                  <div className="time-group-modal">
+                    <span className="time-label-modal">Check Out</span>
+                    <div className="time-value-modal">
+                      {formatTime(attendance?.timeOut)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hours-section-modal">
+                <div className="hours-item-modal">
+                  <span className="hours-label-modal">Break</span>
+                  <span className="hours-value-modal break">
+                    {formatDuration(attendance?.breakTime)}
+                  </span>
+                </div>
+                <div className="hours-item-modal">
+                  <span className="hours-label-modal">Total</span>
+                  <span className="hours-value-modal total">
+                    {formatDuration(attendance?.totalHours)}
+                  </span>
+                </div>
+              </div>
+
+              <div className="status-section-modal">
+                <span
+                  className={`status-badge-modal ${
+                    attendance?.status === 'completed' ? "approved" : 
+                    attendance?.status === 'working' ? "working" :
+                    attendance?.status === 'on_break' ? "on-break" : "pending"
+                  }`}
+                >
+                  {getStatusDisplay(attendance?.status)}
+                </span>
+              </div>
+            </>
+          ) : (
+            <div className="no-data-modal">
+              <span className="no-data-text-modal">
+                {isLoading ? "Loading..." : "No attendance data for this date"}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Calendar = () => {
   const navigate = useNavigate()
   const today = new Date()
@@ -17,6 +103,13 @@ const Calendar = () => {
   const [year, setYear] = useState(today.getFullYear())
   const [month, setMonth] = useState(today.getMonth())
   const [activeNav, setActiveNav] = useState("CALENDAR")
+  const [modalData, setModalData] = useState({ 
+    isOpen: false, 
+    attendance: null, 
+    hasAttendance: false,
+    date: ""
+  })
+
   const { userProfile } = useUserProfile()
 
   const { 
@@ -55,6 +148,25 @@ const Calendar = () => {
     }
   }
 
+  const handleAttendanceClick = (attendance, hasAttendance, day, month, year) => {
+    const dateString = `${day} ${months[month]} ${year}`;
+    setModalData({
+      isOpen: true,
+      attendance,
+      hasAttendance,
+      date: dateString
+    });
+  };
+
+  const closeModal = () => {
+    setModalData({ 
+      isOpen: false, 
+      attendance: null, 
+      hasAttendance: false,
+      date: ""
+    });
+  };
+
   const generateCalendarDays = () => {
     const firstDay = new Date(year, month, 1).getDay()
     const daysInMonth = new Date(year, month + 1, 0).getDate()
@@ -88,7 +200,7 @@ const Calendar = () => {
     return date.toLocaleTimeString('en-US', { 
       hour: '2-digit', 
       minute: '2-digit', 
-      hour12: false 
+      hour12: true
     })
   }
 
@@ -196,11 +308,29 @@ const Calendar = () => {
 
           {/* Error handling */}
           {error && (
-            <div style={{ color: "red", marginBottom: 16, padding: "8px 0" }}>
-              Error loading attendance: {error.message}
+            <div style={{ 
+              color: "#721c24", 
+              backgroundColor: "#f8d7da", 
+              border: "1px solid #f5c6cb",
+              padding: "12px 16px",
+              borderRadius: "8px",
+              margin: "0 24px 16px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center"
+            }}>
+              <span>Error loading attendance: {error.message}</span>
               <button 
                 onClick={() => refetch()}
-                style={{ marginLeft: 8, color: "blue", background: "none", border: "none", cursor: "pointer" }}
+                style={{ 
+                  marginLeft: 8, 
+                  color: "#721c24", 
+                  background: "none", 
+                  border: "1px solid #721c24",
+                  borderRadius: "4px",
+                  padding: "4px 8px",
+                  cursor: "pointer"
+                }}
               >
                 Retry
               </button>
@@ -230,6 +360,13 @@ const Calendar = () => {
                   } ${hasAttendance ? "has-data" : ""} ${
                     isLoading ? "loading" : ""
                   }`}
+                  onClick={() => !dayObj.isOtherMonth && handleAttendanceClick(
+                    attendance, 
+                    hasAttendance, 
+                    dayObj.day, 
+                    month, 
+                    year
+                  )}
                 >
                   <div className="day-number">{dayObj.day}</div>
 
@@ -272,7 +409,7 @@ const Calendar = () => {
                           <div className="status-section">
                             <span
                               className={`status-badge ${
-                                attendance?.status === 'completed' ? "pending" : 
+                                attendance?.status === 'completed' ? "approved" : 
                                 attendance?.status === 'working' ? "working" :
                                 attendance?.status === 'on_break' ? "on-break" : "pending"
                               }`}
@@ -296,6 +433,25 @@ const Calendar = () => {
           </div>
         </div>
       </main>
+
+      <AttendanceModal 
+        isOpen={modalData.isOpen}
+        onClose={closeModal}
+        attendance={modalData.attendance}
+        hasAttendance={modalData.hasAttendance}
+        isLoading={isLoading}
+        formatTime={formatTime}
+        formatDuration={formatDuration}
+        getStatusDisplay={getStatusDisplay}
+        date={modalData.date}
+      />
+
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="loading-spinner"></div>
+          <div className="loading-text">Loading attendance data...</div>
+        </div>
+      )}
     </div>
   )
 }
