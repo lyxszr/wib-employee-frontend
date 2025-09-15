@@ -257,30 +257,6 @@ const ProfileSettings = () => {
                             />
                         </div>
 
-                        <div className="form-group">
-                            <label htmlFor="username">Username</label>
-                            <input 
-                                type="text" 
-                                id="username" 
-                                className="form-input" 
-                                value={profileData.username}
-                                onChange={(e) => handleProfileChange('username', e.target.value)}
-                                disabled={!editingStates.profile}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="email">Email Address</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                className="form-input" 
-                                value={profileData.email}
-                                onChange={(e) => handleProfileChange('email', e.target.value)}
-                                disabled={!editingStates.profile}
-                            />
-                        </div>
-
                         {editingStates.profile && (
                             <div>
                                 <button className="save-button" onClick={saveProfile}>
