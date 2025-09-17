@@ -379,5 +379,30 @@
     padding: 8px;
     font-size: 13px;
   }
+
+
+}/* Place skip button inside the button stack */
+.skip-btn {
+  width: 80%; /* same width as other buttons */
+  padding: 15px;
+  background-color: green; /* brown tone so it stands out but fits the palette */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px; /* space from other buttons */
 }
 
+/* Hover effect */
+.skip-btn:hover:not(:disabled) {
+  background-color: #445c2b;
+}
+
+/* Disabled state */
+.skip-btn:disabled {
+  background-color: #B0BEC5;
+  cursor: not-allowed;
+}

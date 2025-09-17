@@ -259,9 +259,9 @@ const AttendanceRecord = () => {
 
           {/* Skip Break Option - only show when user is working and can take break */}
           {employeeStatus?.status === 'working' && employeeStatus?.canSkipBreak && (
-            <div className="button-group">
+            <div className="skip-button-group">
               <button
-                className="btn-skip-break"
+                className="skip-btn"
                 onClick={() => handleTimeInAction(true)}
                 disabled={isLoading}
               >
