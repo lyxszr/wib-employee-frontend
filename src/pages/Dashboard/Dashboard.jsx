@@ -7,7 +7,7 @@ const Dashboard = () => {
   const [year, setYear] = useState(2025)
   const [month, setMonth] = useState("September")
   const [activeMonthBtn, setActiveMonthBtn] = useState("Current Month")
-  const [activeNav, setActiveNav] = useState("DASHBOARD") // Changed from "CALENDAR" to "DASHBOARD"
+  const [activeNav, setActiveNav] = useState("DASHBOARD")
   const navigate = useNavigate()
   
   const handleMonthBtnClick = (btn) => setActiveMonthBtn(btn)
@@ -20,7 +20,52 @@ const Dashboard = () => {
     } else if (nav === "CALENDAR") {
       navigate("/calendar")
     }
-  };
+  }
+
+  // Print functions
+  const handlePrintAll = () => {
+    window.print()
+  }
+
+  const handlePrintSummary = () => {
+    // Create a new window with only the summary content
+    const printWindow = window.open('', '_blank')
+    const summaryContent = document.querySelector('.summary-section')
+    const leaveCredits = document.querySelector('.leave-credits')
+    
+    if (summaryContent && leaveCredits) {
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Attendance Summary - ${month} ${year}</title>
+            <style>
+              body { font-family: Arial, sans-serif; margin: 20px; }
+              .page-title { text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 30px; }
+              table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+              th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+              th { background-color: #f2f2f2; font-weight: bold; }
+              tr:nth-child(even) { background-color: #f8f9fa; }
+              .leave-section { margin-bottom: 30px; }
+              .leave-header { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
+              h2 { text-align: center; margin: 20px 0; }
+              @media print {
+                body { margin: 0; }
+                .no-print { display: none; }
+              }
+            </style>
+          </head>
+          <body>
+            <div class="page-title">${month.toUpperCase()} ${year}</div>
+            ${summaryContent.outerHTML}
+            ${leaveCredits.outerHTML}
+          </body>
+        </html>
+      `)
+      printWindow.document.close()
+      printWindow.print()
+      printWindow.close()
+    }
+  }
 
   return (
     <div className="dashboard">
@@ -31,13 +76,13 @@ const Dashboard = () => {
         month={month}
         setYear={setYear}
         setMonth={setMonth}
-    />
+      />
 
-    <main className="content">
-      <div className="month-controls">
-        <button
-          className={`month-btn${activeMonthBtn === "Previous Month" ? " active" : ""}`}
-          onClick={() => handleMonthBtnClick("Previous Month")}
+      <main className="content">
+        <div className="month-controls no-print">
+          <button
+            className={`month-btn${activeMonthBtn === "Previous Month" ? " active" : ""}`}
+            onClick={() => handleMonthBtnClick("Previous Month")}
           >
             Previous Month
           </button>
@@ -61,18 +106,18 @@ const Dashboard = () => {
         <section className="summary-section">
           <div className="summary-tab">
             Summary
-            <div className="export-buttons">
+            <div className="export-buttons no-print">
               <button
                 className="export-btn"
-                onClick={() => alert("Export functionality would be implemented here")}
+                onClick={handlePrintAll}
               >
-                Export All
+                Print All
               </button>
               <button
                 className="export-btn"
-                onClick={() => alert("Export functionality would be implemented here")}
+                onClick={handlePrintSummary}
               >
-                Export Summary
+                Print Summary
               </button>
             </div>
           </div>
@@ -149,7 +194,7 @@ const Dashboard = () => {
                 </tr>
               </tbody>
             </table>
-            <div style={{ padding: 15 }}>
+            <div style={{ padding: 15 }} className="no-print">
               <button
                 className="show-details-btn"
                 onClick={() => alert("Show details functionality would be implemented here")}
@@ -181,7 +226,7 @@ const Dashboard = () => {
                 </tr>
               </tbody>
             </table>
-            <div style={{ padding: 15 }}>
+            <div style={{ padding: 15 }} className="no-print">
               <button
                 className="show-details-btn"
                 onClick={() => alert("Show details functionality would be implemented here")}
@@ -229,7 +274,7 @@ const Dashboard = () => {
               </tr>
             </tbody>
           </table>
-          <div className="pagination">
+          <div className="pagination no-print">
             <span style={{ marginRight: 20 }}>Showing 1 to 2 of 2 entries</span>
             <button className="page-btn">First</button>
             <button className="page-btn">Previous</button>

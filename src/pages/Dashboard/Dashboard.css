@@ -301,6 +301,28 @@
     min-width: 100%;
 }
 
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .dashboard {
+    margin: 0;
+    padding: 0;
+  }
+  
+  table {
+    page-break-inside: avoid;
+  }
+  
+  .summary-section,
+  .leave-credits,
+  .holiday-section {
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+  }
+}
+
 @media (max-width: 1200px) {
     .leave-credits,
     .overtime-sections {
