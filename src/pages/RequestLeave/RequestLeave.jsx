@@ -15,6 +15,7 @@ const RequestLeave = () => {
   const [month, setMonth] = useState(months[new Date().getMonth()])
   const [activeNav, setActiveNav] = useState("REQUEST LEAVE")
   const [formData, setFormData] = useState({
+    leaveType: "",
     reason: "",
     startDate: "",
     endDate: "",
@@ -29,11 +30,11 @@ const RequestLeave = () => {
   const handleSubmitLeaveRequest = async (e) => {
     e.preventDefault()
     
-    // Extract values from formData
-    const { reason, startDate, endDate } = formData
+    const { leaveType, reason, startDate, endDate } = formData
     
     console.log(
       userProfile?._id, 
+      leaveType,
       reason, 
       startDate, 
       endDate 
@@ -41,6 +42,7 @@ const RequestLeave = () => {
     
     submitLeaveRequestMutation.mutate({ 
       userId: userProfile?._id, 
+      leaveType,
       reason, 
       startDate, 
       endDate 
@@ -80,6 +82,27 @@ const RequestLeave = () => {
           <h1 className="form-title">Request Leave</h1>
 
           <form onSubmit={handleSubmitLeaveRequest}>
+
+            {/* Leave Type */}
+            <div className="form-group full-width">
+              <label className="form-label">Type of Leave</label>
+              <select
+                name="leaveType"
+                className={`form-select ${errors.leaveType ? "error" : ""}`}
+                value={formData.leaveType}
+                onChange={handleChange}
+                required
+              >
+                <option value="">-- Select Leave Type --</option>
+                <option value="Sick Leave">Sick Leave</option>
+                <option value="Vacation Leave">Vacation Leave</option>
+                <option value="Emergency Leave">Emergency Leave</option>
+                <option value="Maternity Leave">Maternity Leave</option>
+                <option value="Paternity Leave">Paternity Leave</option>
+              </select>
+              {errors.leaveType && <span className="error-message">{errors.leaveType}</span>}
+            </div>
+
             {/* Reason for Leave */}
             <div className="form-group full-width">
               <label className="form-label">Reason for Leave</label>
