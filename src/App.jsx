@@ -7,6 +7,7 @@ import './App.css'
 import { useApiClientSetup } from './hooks/shared/useApiClient'
 import ProfileSettings from "./pages/Profile/Profile"
 
+
 const Authentication = lazy(() => import('./pages/Authentication/Authentication'))
 const AttendanceRecord = lazy(() => import('./pages/AttendanceRecord/AttendanceRecord'))
 const Dashboard = lazy(() => import('./pages/Dashboard/Dashboard'))
