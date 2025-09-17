@@ -69,7 +69,6 @@ const ProfileSidebar = ({ isOpen, onClose }) => {
       <div className={`profile-sidebar ${isOpen ? 'open' : ''}`}>
         {/* Header with close button */}
         <div className="profile-sidebar-headers">
-        
           <button 
             className="close-button" 
             onClick={onClose}
@@ -128,7 +127,6 @@ const ProfileSidebar = ({ isOpen, onClose }) => {
             Edit Profile Settings
           </button>
 
-
           <button 
             className="action-button"
             onClick={() => handleNavigation('/notifications')}
@@ -156,24 +154,10 @@ const ProfileSidebar = ({ isOpen, onClose }) => {
           <h4 className="section-title">Recent Activity</h4>
           <div className="activity-list">
             <div className="activity-item">
-              <div className="activity-icon">📊</div>
-              <div className="activity-content">
-                <p className="activity-title">Dashboard viewed</p>
-                <p className="activity-time">2 hours ago</p>
-              </div>
-            </div>
-            <div className="activity-item">
               <div className="activity-icon">📅</div>
               <div className="activity-content">
                 <p className="activity-title">Leave request submitted</p>
                 <p className="activity-time">1 day ago</p>
-              </div>
-            </div>
-            <div className="activity-item">
-              <div className="activity-icon">⚙️</div>
-              <div className="activity-content">
-                <p className="activity-title">Profile updated</p>
-                <p className="activity-time">3 days ago</p>
               </div>
             </div>
           </div>
