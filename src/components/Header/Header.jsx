@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
 import ProfileSidebar from "../Sidebar/Sidebar"
 import useUserProfile from "../../hooks/user/useUserProfile"
 import "./Header.css"
@@ -17,7 +16,6 @@ const Header = ({
     "July", "August", "September", "October", "November", "December"
   ]
 }) => {
-  const navigate = useNavigate()
   const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false)
 
   // Defensive: ensure month is a string and in months array
@@ -33,12 +31,6 @@ const Header = ({
   // Close profile sidebar
   const closeProfileSidebar = () => {
     setIsProfileSidebarOpen(false)
-  }
-
-  // Handle logout from main navigation
-  const handleLogout = () => {
-    localStorage.removeItem('authToken')
-    navigate('/authentication')
   }
 
   const { userProfile } = useUserProfile()
@@ -102,14 +94,6 @@ const Header = ({
             style={{ background: "none", border: "none", padding: 0, margin: 0, cursor: "pointer" }}
           >
             REQUEST LEAVE
-          </button>
-          <button
-            type="button"
-            className="nav-link"
-            onClick={handleLogout}
-            style={{ background: "none", border: "none", padding: 0, margin: 0, cursor: "pointer" }}
-          >
-            LOGOUT
           </button>
         </div>
 
