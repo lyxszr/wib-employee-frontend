@@ -119,7 +119,7 @@ const RequestLeave = () => {
 
             {/* Start Date and End Date */}
             <div className="form-row">
-              <div className="form-group">
+              <div className="form-label">
                 <label className="form-label">Start Date</label>
                 <input
                   type="date"
@@ -131,7 +131,7 @@ const RequestLeave = () => {
                 />
                 {errors.startDate && <span className="error-message">{errors.startDate}</span>}
               </div>
-              <div className="form-group">
+              <div className="form-label">
                 <label className="form-label">End Date</label>
                 <input
                   type="date"
