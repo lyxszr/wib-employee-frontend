@@ -680,13 +680,7 @@ const Calendar = () => {
             </div>
 
             <div className="calendar-actions">
-              <button 
-                className="action-btn"
-                disabled={isLoading}
-              >
-                <span className="btn-icon">📤</span>
-                Import
-              </button>
+              
               <button 
                 className="action-btn"
                 onClick={handlePrint}
@@ -695,14 +689,7 @@ const Calendar = () => {
                 <span className="btn-icon">🖨️</span>
                 Print
               </button>
-              <button 
-                className="action-btn"
-                onClick={() => refetch()}
-                disabled={isLoading}
-              >
-                <span className="btn-icon">🔄</span>
-                {isLoading ? "Loading..." : "Refresh"}
-              </button>
+            
             </div>
           </div>
 
