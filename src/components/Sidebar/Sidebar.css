@@ -21,15 +21,15 @@
 .profile-sidebar {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0; /* Changed from right: 0 to left: 0 */
   width: 400px;
   height: 100vh;
   background-color: white;
-  box-shadow: -4px 0 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.1); /* Changed shadow direction */
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  transform: translateX(100%);
+  transform: translateX(-100%); /* Changed from translateX(100%) to translateX(-100%) */
   transition: transform 0.3s ease-out;
   overflow-y: auto;
 }
@@ -47,7 +47,6 @@
   border-bottom: 1px solid #e5e7eb;
   background-color: #f8fafc;
 }
-
 
 .close-button {
   background: none;
