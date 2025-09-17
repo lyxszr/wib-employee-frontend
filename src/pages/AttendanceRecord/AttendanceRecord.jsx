@@ -128,13 +128,15 @@ const AttendanceRecord = () => {
     if (statusError) return "Error loading status"
     if (!employeeStatus) return "Enter credentials to check status"
 
-    switch (employeeStatus.status) {
+    switch (employeeStatus?.status) {
       case 'not_clocked_in':
         return "Ready to start your work day"
       case 'working':
         return "Work session active - you can take a break when ready"
       case 'on_break':
         return "On break - click to return to work"
+      case 'ready_for_time_out': 
+        return "Click to end your working day"
       case 'completed':
         return `Work day completed - Total: ${employeeStatus.totalHours?.toFixed(2) || 0}hrs`
       case 'not_employee':

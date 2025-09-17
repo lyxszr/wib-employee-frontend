@@ -13,6 +13,7 @@ export const useSignIn = () => {
     ({ email, password }) => ({
       endpoint: 'api/auth/v1/sign-in', 
       data: { email, password, logInType: 'employee' }
+      data: { email, password, logInType: 'employee'  }
     }),
     {
       onSuccess: (data) => {
