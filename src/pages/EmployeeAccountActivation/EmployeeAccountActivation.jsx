@@ -79,7 +79,6 @@ const EmployeeAccountActivation = () => {
           </button>
         </form>
 
-        {/* Back button */}
         <div style={{ marginTop: "12px" }}>
           <button
             onClick={() => navigate("/authentication")}
