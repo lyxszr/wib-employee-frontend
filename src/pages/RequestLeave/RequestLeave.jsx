@@ -15,10 +15,10 @@ const RequestLeave = () => {
   const [month, setMonth] = useState(months[new Date().getMonth()])
   const [activeNav, setActiveNav] = useState("REQUEST LEAVE")
   const [formData, setFormData] = useState({
-    leaveType: "",
     reason: "",
     startDate: "",
     endDate: "",
+    leaveCategory: "",
   })
   const { userProfile } = useUserProfile()
 
@@ -30,11 +30,11 @@ const RequestLeave = () => {
   const handleSubmitLeaveRequest = async (e) => {
     e.preventDefault()
     
-    const { leaveType, reason, startDate, endDate } = formData
+    const { leaveCategory, reason, startDate, endDate } = formData
     
     console.log(
       userProfile?._id, 
-      leaveType,
+      leaveCategory,
       reason, 
       startDate, 
       endDate 
@@ -42,10 +42,10 @@ const RequestLeave = () => {
     
     submitLeaveRequestMutation.mutate({ 
       userId: userProfile?._id, 
-      leaveType,
       reason, 
       startDate, 
-      endDate 
+      endDate,
+      leaveCategory,
     })
   }
 
@@ -83,24 +83,24 @@ const RequestLeave = () => {
 
           <form onSubmit={handleSubmitLeaveRequest}>
 
-            {/* Leave Type */}
+            {/* Leave Category */}
             <div className="form-group full-width">
-              <label className="form-label">Type of Leave</label>
+              <label className="form-label">Leave Category</label>
               <select
-                name="leaveType"
-                className={`form-select ${errors.leaveType ? "error" : ""}`}
-                value={formData.leaveType}
+                name="leaveCategory"
+                className={`form-select ${errors.leaveCategory ? "error" : ""}`}
+                value={formData.leaveCategory}
                 onChange={handleChange}
                 required
               >
-                <option value="">-- Select Leave Type --</option>
-                <option value="Sick Leave">Sick Leave</option>
+                <option value="">-- Select Leave Category --</option>
+                <option value="sickLeave">Sick Leave</option>
                 <option value="Vacation Leave">Vacation Leave</option>
                 <option value="Emergency Leave">Emergency Leave</option>
                 <option value="Maternity Leave">Maternity Leave</option>
                 <option value="Paternity Leave">Paternity Leave</option>
               </select>
-              {errors.leaveType && <span className="error-message">{errors.leaveType}</span>}
+              {errors.leaveCategory && <span className="error-message">{errors.leaveCategory}</span>}
             </div>
 
             {/* Reason for Leave */}
