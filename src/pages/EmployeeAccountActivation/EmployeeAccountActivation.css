@@ -1,0 +1,516 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #000000; /* text black */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #ffffff; /* background white */
+}
+
+/* Clean white background */
+.activation-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background elements */
+.activation-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(132, 195, 68, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: float 20s infinite linear;
+  opacity: 0.3;
+}
+
+@keyframes float {
+  0% { transform: translateX(0) translateY(0) rotate(0deg); }
+  100% { transform: translateX(-50px) translateY(-50px) rotate(360deg); }
+}
+
+/* Logo with modern styling */
+.logo {
+  display: block;
+  margin: 0 auto 1.5rem;
+  width: 160px;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* Container with color combination border */
+.activation-card {
+  background: #ffffff;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  border: 1px solid #e9ecef;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 1px 4px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Border strip with your colors */
+.activation-card::before {
+  content: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Title styling */
+.activation-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.025em;
+}
+
+.subtext {
+  font-size: 0.85rem;
+  color: #666666;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Input styling */
+.input-group {
+  text-align: left;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #445c2b;
+  letter-spacing: 0.025em;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  color: #000000;
+}
+
+.input-group input:focus {
+  border-color: #84c344;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(132, 195, 68, 0.15);
+}
+
+.input-group input:hover:not(:focus) {
+  border-color: #adb5bd;
+}
+
+/* Button styling */
+.activate-btn {
+  width: 100%;
+  padding: 0.875rem;
+  background: linear-gradient(135deg, #84c344, #445c2b);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 0.875rem;
+}
+
+.activate-btn:hover {
+  background: linear-gradient(135deg, #445c2b, #84c344);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(132, 195, 68, 0.2);
+}
+
+.activate-btn:active {
+  transform: translateY(0);
+}
+
+/* Secondary button styling */
+.back-btn {
+  width: 100%;
+  padding: 0.875rem;
+  background: #f5f7e6;
+  color: #445c2b;
+  border: 1px solid #e2e8d6;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #e9ecd8;
+  border-color: #d1d9c0;
+  transform: translateY(-1px);
+}
+
+/* Message styling */
+.message {
+  font-size: 0.8rem;
+  margin-bottom: 0.875rem;
+  text-align: center;
+  padding: 0.625rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.error {
+  color: #dc3545;
+  background: rgba(220, 53, 69, 0.08);
+  border: 1px solid rgba(220, 53, 69, 0.15);
+}
+
+.success {
+  color: #198754;
+  background: rgba(25, 135, 84, 0.08);
+  border: 1px solid rgba(25, 135, 84, 0.15);
+}
+
+/* Enhanced animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Loading state */
+.activate-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.activate-btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Extra small devices (phones, 320px and up) */
+@media (max-width: 374px) {
+  .activation-container {
+    padding: 1rem;
+  }
+  
+  .logo {
+    width: 140px;
+    margin-bottom: 1.25rem;
+  }
+  
+  .activation-card {
+    padding: 1.5rem 1rem;
+    border-radius: 14px;
+    max-width: 320px;
+  }
+  
+  .activation-card::before {
+    height: 5px;
+    border-radius: 14px 14px 0 0;
+  }
+  
+  .activation-card h2 {
+    font-size: 1.25rem;
+  }
+  
+  .subtext {
+    font-size: 0.8rem;
+  }
+  
+  .input-group input,
+  .activate-btn,
+  .back-btn {
+    padding: 0.625rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Small devices (landscape phones, 375px and up) */
+@media (min-width: 375px) and (max-width: 767px) {
+  .activation-container {
+    padding: 1.25rem;
+  }
+  
+  .logo {
+    width: 150px;
+  }
+  
+  .activation-card {
+    padding: 1.75rem 1.5rem;
+    max-width: 340px;
+  }
+  
+  .activation-card h2 {
+    font-size: 1.375rem;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .activation-container {
+    padding: 1.5rem;
+  }
+  
+  .logo {
+    width: 170px;
+    margin-bottom: 2rem;
+  }
+  
+  .activation-card {
+    padding: 2.25rem 2rem;
+    max-width: 380px;
+  }
+  
+  .activation-card h2 {
+    font-size: 1.625rem;
+  }
+  
+  .subtext {
+    font-size: 0.9rem;
+  }
+  
+  .input-group input,
+  .activate-btn,
+  .back-btn {
+    padding: 0.875rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Large devices (desktops, 1024px and up) */
+@media (min-width: 1024px) {
+  .activation-container {
+    padding: 2rem;
+  }
+  
+  .logo {
+    width: 180px;
+    margin-bottom: 2rem;
+  }
+  
+  .activation-card {
+    padding: 2.5rem 2rem;
+    max-width: 380px;
+  }
+  
+  .activation-card h2 {
+    font-size: 1.75rem;
+  }
+  
+  .subtext {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+  
+  .input-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .input-group input,
+  .activate-btn,
+  .back-btn {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+}
+
+/* Extra large devices (large desktops, 1440px and up) */
+@media (min-width: 1440px) {
+  .activation-container {
+    padding: 2.5rem;
+  }
+  
+  .logo {
+    width: 200px;
+  }
+  
+  .activation-card {
+    padding: 3rem 2.5rem;
+    max-width: 400px;
+  }
+  
+  .activation-card h2 {
+    font-size: 1.875rem;
+  }
+}
+
+/* Ultra-wide screens (1920px and up) */
+@media (min-width: 1920px) {
+  .activation-container {
+    padding: 3rem;
+  }
+  
+  .activation-card {
+    max-width: 420px;
+    padding: 3rem 2.5rem;
+  }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media (max-height: 640px) and (orientation: landscape) {
+  .activation-container {
+    padding: 1rem;
+  }
+  
+  .logo {
+    width: 140px;
+    margin-bottom: 1rem;
+  }
+  
+  .activation-card {
+    padding: 1.5rem;
+    max-width: 340px;
+  }
+  
+  .activation-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .subtext {
+    margin-bottom: 1rem;
+  }
+  
+  .input-group {
+    margin-bottom: 1rem;
+  }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .logo {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .activation-container::before {
+    animation: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .activation-container {
+    background: linear-gradient(
+    135deg,
+    #ffffff 0%,     /* white (dominant) */
+    #f9f9f4 25%,    /* very light dirty white */
+    #d8e7c8 55%,    /* pale green */
+    #a8c989 80%,    /* soft green */
+    #e9dd8d 100%    /* muted yellow */
+  );
+  }
+  
+  .activation-card {
+    background: #1e1e1e;
+    border: 1px solid #333;
+  }
+  
+  .activation-card::before {
+    background: linear-gradient(90deg, 
+      #f2d418 0%, 
+      #445c2b 25%, 
+      #84c344 50%, 
+      #f5f7e6 75%, 
+      #1e1e1e 100%
+    );
+  }
+  
+  .activation-card h2 {
+    color: #ffffff;
+  }
+  
+  .subtext {
+    color: #cccccc;
+  }
+  
+  .input-group label {
+    color: #a2d16f;
+  }
+  
+  .input-group input {
+    background: #2d2d2d;
+    border-color: #444;
+    color: #ffffff;
+  }
+  
+  .input-group input:focus {
+    border-color: #84c344;
+    box-shadow: 0 0 0 3px rgba(132, 195, 68, 0.2);
+  }
+  
+  .back-btn {
+    background: #2d2d2d;
+    border-color: #444;
+    color: #a2d16f;
+  }
+  
+  .back-btn:hover {
+    background: #333;
+    border-color: #555;
+  }
+}
