@@ -6,7 +6,7 @@ import { UserProfileProvider } from "./context/UserProfileContext"
 import './App.css'
 import { useApiClientSetup } from './hooks/shared/useApiClient'
 import ProfileSettings from "./pages/Profile/Profile"
-
+import EmployeeAccountActivation from "./components/EmployeeAccountActivation/EmployeeAccountActivation"
 
 const Authentication = lazy(() => import('./pages/Authentication/Authentication'))
 const AttendanceRecord = lazy(() => import('./pages/AttendanceRecord/AttendanceRecord'))
@@ -15,6 +15,7 @@ const Calendar = lazy(() => import('./pages/Calendar/Calendar'))
 const RequestLeave = lazy(() => import('./pages/RequestLeave/RequestLeave'))  
 const Profile = lazy(() => import('./pages/Profile/Profile'))
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'))
+
 
 const AppContent = () => {
   const { isInitialized } = useApiClientSetup()
@@ -47,13 +48,14 @@ const AppContent = () => {
         </div>
       }>
         <Routes>
-          {/* Public route - Authentication */}
+          {/* Public routes */}
           <Route path="/authentication" element={<Authentication />} />
+          <Route path="/activate-account" element={<EmployeeAccountActivation />} />
           
           {/* Redirect root to dashboard */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           
-          {/* Protected routes - ALL routes except authentication are protected */}
+          {/* Protected routes - ALL routes except authentication and activation are protected */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/attendance-record" element={<AttendanceRecord />} />
