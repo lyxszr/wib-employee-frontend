@@ -16,9 +16,9 @@ export const useGetMonthlyAttendance = (year, month, email) => {
 export const useSubmitLeaveRequest = () => {
   return useApiMutation(
     'post',
-    ({ userId, reason, startDate, endDate }) => ({
+    ({ userId, reason, startDate, endDate, leaveCategory }) => ({
       endpoint: `api/employee/v1/submit-leave-request/${userId}`,
-      data: { reason, startDate, endDate }
+      data: { reason, startDate, endDate, leaveCategory }
     }),
     {
       onSuccess: (data) => console.log('Leave request submitted:', data),
