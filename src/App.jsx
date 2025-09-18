@@ -15,6 +15,8 @@ const Calendar = lazy(() => import('./pages/Calendar/Calendar'))
 const RequestLeave = lazy(() => import('./pages/RequestLeave/RequestLeave'))  
 const Profile = lazy(() => import('./pages/Profile/Profile'))
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'))
+const EmployeeAccountActivation = lazy(() => import('./pages/EmployeeAccountActivation/EmployeeAccountActivation'))
+
 
 const AppContent = () => {
   const { isInitialized } = useApiClientSetup()
@@ -61,6 +63,8 @@ const AppContent = () => {
             <Route path="/request-leave" element={<RequestLeave />} />
             <Route path="/profile-settings" element={<ProfileSettings />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/employee-account-activation" element={<EmployeeAccountActivation />} />
+
           </Route>
           
           {/* Catch-all route - redirect unknown paths to dashboard */}
