@@ -21,7 +21,6 @@ const EmployeeAccountActivation = lazy(() => import('./pages/EmployeeAccountActi
 const AppContent = () => {
   const { isInitialized } = useApiClientSetup()
   
-  // Show loading while initializing authentication
   if (!isInitialized) {
     return (
       <div style={{ 
